@@ -1,4 +1,4 @@
 package hospital.logic.services;
 
-public class Service {
+public class PrescripcionService {
 }

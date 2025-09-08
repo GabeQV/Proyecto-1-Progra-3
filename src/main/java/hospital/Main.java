@@ -1,17 +1,25 @@
 package hospital;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import hospital.presentation.prescripcion.PrescripcionView;
+
+import javax.swing.*;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");}
+        catch (Exception ex) {};
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        PrescripcionView view = new PrescripcionView();
+
+        JFrame window = new JFrame();
+        window.setSize(600,400);
+        window.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        window.setTitle("Hospital");
+        window.setContentPane(view.getPrescripcionPanel());
+
+        window.setLocationRelativeTo(null);
+
+        window.setVisible(true);
     }
 }
