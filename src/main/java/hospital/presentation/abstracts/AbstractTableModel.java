@@ -1,4 +1,4 @@
-package hospital.presentation;
+package hospital.presentation.abstracts;
 
 import java.util.List;
 
