@@ -8,10 +8,10 @@ public class PrescripcionView {
     private JButton agregarMedicamentoButton;
     private JPanel RecetaMedicaPanel;
     private JPanel ControlPanel;
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
-    private JButton button4;
+    private JButton guardarButton;
+    private JButton limpiarButton;
+    private JButton descartarMedicamentoButton;
+    private JButton detallesButton;
     private JTextField fechaDeRetiroTextField;
     private JTextField mostrarPacienteAcaTextField;
 
