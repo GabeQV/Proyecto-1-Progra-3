@@ -1,4 +1,6 @@
 package hospital.presentation.lista_farmaceutas;
 
-public class Model {
+import hospital.presentation.abstracts.AbstractModel;
+
+public class Model extends AbstractModel {
 }
