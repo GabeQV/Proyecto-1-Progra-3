@@ -2,6 +2,7 @@ package hospital.data;
 
 import hospital.logic.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class Data {
         farmaceutas = new ArrayList<>();
         medicamentos = new ArrayList<>();
         recetas = new ArrayList<>();
+
     }
 
     public List<Medico> getMedicos() {return medicos;}
