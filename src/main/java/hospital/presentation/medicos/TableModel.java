@@ -10,7 +10,6 @@ import java.util.List;
 public class TableModel extends AbstractTableModel<Medico> implements javax.swing.table.TableModel{
 
     public static final int ID = 0;
-    public static final int CLAVE = 1;
     public static final int NOMBRE = 2;
     public static final int ESPECIALIDAD = 3;
 
@@ -20,9 +19,8 @@ public class TableModel extends AbstractTableModel<Medico> implements javax.swin
 
     @Override
     protected void initColNames() {
-        colNames = new String[5];
+        colNames = new String[3];
         colNames[ID] = "Id";
-        colNames[CLAVE] = "Clave";
         colNames[NOMBRE] = "Nombre";
         colNames[ESPECIALIDAD] = "Especialidad";
     }
@@ -32,8 +30,6 @@ public class TableModel extends AbstractTableModel<Medico> implements javax.swin
         switch (cols[col]) {
             case ID:
                 return e.getId();
-            case CLAVE:
-                return e.getClave();
             case NOMBRE:
                 return e.getNombre();
             case ESPECIALIDAD:
