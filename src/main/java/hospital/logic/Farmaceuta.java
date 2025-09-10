@@ -7,6 +7,8 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Farmaceuta extends Usuario {
+
+    public Farmaceuta() {super();}
     public Farmaceuta(String id, String clave, String nombre) {
         super(id, clave, nombre);
     }

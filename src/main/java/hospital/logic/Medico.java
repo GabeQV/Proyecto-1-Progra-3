@@ -16,7 +16,8 @@ public class Medico extends Usuario {
     }
 
     public Medico(){
-        this("","","","");
+        super();
+        this.especialidad = "";
     }
 
 
@@ -24,12 +25,14 @@ public class Medico extends Usuario {
         return especialidad;
     }
 
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
+    }
+
     @Override
     public String getTipo() {
         return "MEDICO";
     }
 
-    public void setEspecialidad(String especialidad) {
-        this.especialidad = especialidad;
-    }
+
 }

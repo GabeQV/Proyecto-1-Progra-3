@@ -5,15 +5,17 @@ import jakarta.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlSeeAlso({Medico.class, Paciente.class, Farmaceuta.class})
 public abstract class Usuario {
-    @XmlElement
+
     @XmlID
     protected String id;
-    @XmlElement
     protected String clave;
-    @XmlElement
     protected String nombre;
 
-    protected Usuario(){}
+    protected Usuario(){
+        this.id = "";
+        this.clave = "";
+        this.nombre = "";
+    }
 
     public Usuario(String id, String clave, String nombre) {
         this.id = id;
@@ -25,9 +27,13 @@ public abstract class Usuario {
         return id;
     }
 
+    public void setId(String id) {this.id = id;}
+
     public String getNombre() {
         return nombre;
     }
+
+    public void setNombre(String nombre) {this.nombre = nombre;}
 
     public String getClave() {
         return clave;
