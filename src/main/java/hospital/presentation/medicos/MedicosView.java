@@ -45,6 +45,12 @@ public class MedicosView implements PropertyChangeListener {
 
             }
         });
+        limpiarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.clear();
+            }
+        });
     }
 
     @Override
