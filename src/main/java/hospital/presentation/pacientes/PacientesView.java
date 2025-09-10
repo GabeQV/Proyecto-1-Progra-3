@@ -1,7 +1,9 @@
-package hospital.presentation.medicos;
+package hospital.presentation.pacientes;
 
+
+import com.github.lgooddatepicker.components.DatePicker;
 import hospital.Main;
-import hospital.logic.Medico;
+import hospital.logic.Paciente;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -11,35 +13,35 @@ import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class MedicosView implements PropertyChangeListener {
-    private JPanel MedicosPanel;
-    private JPanel Medico;
+public class PacientesView implements PropertyChangeListener {
+    private JPanel PacientesPanel;
+    private JPanel Paciente;
     private JLabel idLabel;
-    private JTextField especialidadField;
     private JTextField idField;
     private JTextField nombreField;
     private JButton guardarButton;
     private JButton limpiarButton;
     private JButton borrarButton;
+    private JTextField telefonoField;
     private JTextField busquedaField;
     private JButton buscarButton;
-    private JTable medicosTable;
+    private JTable pacientesTable;
+    private DatePicker fechaNacPicker;
 
     Controller controller;
     Model model;
 
-
-    public MedicosView() {
+    public PacientesView() {
         guardarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (validate()) {
-                    Medico n = take();
+                    Paciente n = take();
                     try {
                         controller.create(n);
-                        JOptionPane.showMessageDialog(MedicosPanel, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(PacientesPanel, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(MedicosPanel, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(PacientesPanel, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
                     }
 
                 }
@@ -57,19 +59,19 @@ public class MedicosView implements PropertyChangeListener {
         borrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Medico n =  model.getCurrent();
+                Paciente n =  model.getCurrent();
                 if (n.getId() == null || n.getId().isEmpty()) {
-                    JOptionPane.showMessageDialog(MedicosPanel, "Seleccione un médico para borrar", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(PacientesPanel, "Seleccione un paciente para borrar", "ERROR", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
-                int confirm = JOptionPane.showConfirmDialog(MedicosPanel, "¿Está seguro de borrar este médico?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                int confirm = JOptionPane.showConfirmDialog(PacientesPanel, "¿Está seguro de borrar este paciente?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
                     try {
                         controller.delete(n);
-                        JOptionPane.showMessageDialog(MedicosPanel, "Médico eliminado", "", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(PacientesPanel, "Paciente eliminado", "", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(MedicosPanel, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(PacientesPanel, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
                     }
                 }
 
@@ -82,18 +84,18 @@ public class MedicosView implements PropertyChangeListener {
                 try {
                     controller.read(busquedaField.getText());
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(MedicosPanel, ex.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(PacientesPanel, ex.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });
 
 
-        medicosTable.addMouseListener(new MouseAdapter() {
+        pacientesTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2 && medicosTable.getSelectedRow() != -1) {
-                    int row = medicosTable.getSelectedRow();
-                    Medico seleccionado = ((TableModel) medicosTable.getModel()).getRowAt(row);
+                if (e.getClickCount() == 2 && pacientesTable.getSelectedRow() != -1) {
+                    int row = pacientesTable.getSelectedRow();
+                    Paciente seleccionado = ((TableModel) pacientesTable.getModel()).getRowAt(row);
                     controller.model.setCurrent(seleccionado);
                 }
             }
@@ -104,26 +106,26 @@ public class MedicosView implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
             case Model.LIST:
-                int[] cols = {TableModel.ID, TableModel.NOMBRE, TableModel.ESPECIALIDAD};
-                medicosTable.setModel(new TableModel(cols, model.getList()));
+                int[] cols = {TableModel.ID, TableModel.NOMBRE, TableModel.FECHA_NACIMIENTO,TableModel.TELEFONO};
+                pacientesTable.setModel(new TableModel(cols, model.getList()));
                 break;
             case Model.CURRENT:
-                Medico m = model.getCurrent();
+                Paciente m = model.getCurrent();
                 idField.setText(m.getId());
                 nombreField.setText(m.getNombre());
-                especialidadField.setText(m.getEspecialidad());
+                fechaNacPicker.setDate(m.getFechaNacimiento());
+                telefonoField.setText(m.getTelefono());
                 break;
         }
-        MedicosPanel.revalidate();
+        PacientesPanel.revalidate();
     }
 
-
-    public Medico take() {
-        Medico e = new Medico();
+    public Paciente take() {
+        Paciente e = new Paciente();
         e.setId(idField.getText());
-        e.setClave(idField.getText());
         e.setNombre(nombreField.getText());
-        e.setEspecialidad(especialidadField.getText());
+        e.setFechaNacimiento(fechaNacPicker.getDate());
+        e.setTelefono(telefonoField.getText());
         return e;
     }
 
@@ -147,18 +149,25 @@ public class MedicosView implements PropertyChangeListener {
             nombreField.setToolTipText(null);
         }
 
-        if (especialidadField.getText().isEmpty()) {
+        if (fechaNacPicker.getDate() == null) {
             valid = false;
-            especialidadField.setBackground(Main.BACKGROUND_ERROR);
-            especialidadField.setToolTipText("Departamento requerido");
+            fechaNacPicker.getComponentDateTextField().setBackground(Main.BACKGROUND_ERROR);
+            fechaNacPicker.getComponentDateTextField().setToolTipText("Fecha de nacimiento requerida");
         } else {
-            especialidadField.setBackground(null);
-            especialidadField.setToolTipText(null);
+            fechaNacPicker.getComponentDateTextField().setBackground(null);
+            fechaNacPicker.getComponentDateTextField().setToolTipText(null);
+        }
+
+        if (telefonoField.getText().isEmpty()) {
+            valid = false;
+            telefonoField.setBackground(Main.BACKGROUND_ERROR);
+            telefonoField.setToolTipText("Telefono requerido");
+        } else {
+            telefonoField.setBackground(null);
+            telefonoField.setToolTipText(null);
         }
         return valid;
     }
-
-    public JPanel getMedicosPanel() {return MedicosPanel;}
 
     public void setController(Controller controller) {
         this.controller = controller;
@@ -168,4 +177,6 @@ public class MedicosView implements PropertyChangeListener {
         this.model = model;
         model.addPropertyChangeListener(this);
     }
+
+    public JPanel getPacientesPanel() {return PacientesPanel;}
 }
