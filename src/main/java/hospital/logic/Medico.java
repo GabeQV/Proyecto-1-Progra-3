@@ -32,4 +32,11 @@ public class Medico extends Usuario {
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
 }
