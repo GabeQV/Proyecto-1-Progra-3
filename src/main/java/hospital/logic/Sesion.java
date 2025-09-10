@@ -3,6 +3,8 @@ package hospital.logic;
 import hospital.presentation.dashboard.DashboardView;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Sesion {
     private static Sesion theInstance;
@@ -59,6 +61,13 @@ public class Sesion {
 
         mainWindow.setContentPane(tabbedPane);
         mainWindow.setLocationRelativeTo(null);
+
+        mainWindow.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                Service.instance().stop();
+            }
+        });
         mainWindow.setVisible(true);
 
     }

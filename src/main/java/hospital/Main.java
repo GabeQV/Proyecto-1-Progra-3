@@ -23,8 +23,6 @@ public class Main {
         Model model = new Model();
         Controller controller = new Controller(view, model);
 
-
-
         JFrame window = new JFrame();
         window.setSize(400,200);
         window.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);

@@ -37,7 +37,7 @@ public class Data {
         medicamentos = new ArrayList<>();
         recetas = new ArrayList<>();
 
-        medicos.add(new Medico("111","111","Juan Perez","Odontologia"));
+        //medicos.add(new Medico("111","111","Juan Perez","Odontologia"));
         //pacientes.add(new Paciente("123","123","Carlos Gutierrez", LocalDate.of(1998,9,16),"89677869"));
 
     }
