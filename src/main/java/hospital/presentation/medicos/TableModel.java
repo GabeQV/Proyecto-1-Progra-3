@@ -10,8 +10,8 @@ import java.util.List;
 public class TableModel extends AbstractTableModel<Medico> implements javax.swing.table.TableModel{
 
     public static final int ID = 0;
-    public static final int NOMBRE = 2;
-    public static final int ESPECIALIDAD = 3;
+    public static final int NOMBRE = 1;
+    public static final int ESPECIALIDAD = 2;
 
     public TableModel(int[] cols, List<Medico> rows) {
         super(cols, rows);

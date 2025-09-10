@@ -28,7 +28,7 @@ public class Service {
         try {
             XmlPersister.instance().store(data);
         } catch (Exception e) {
-            System.out.println("Error al guardar los datos" + e.getMessage());
+            System.out.println("Error al guardar los datos " + e.getMessage());
         }
     }
 
