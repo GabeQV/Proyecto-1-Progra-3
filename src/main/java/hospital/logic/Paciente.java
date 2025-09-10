@@ -1,7 +1,13 @@
 package hospital.logic;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 import java.time.LocalDate;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Paciente extends Usuario{
     private String id;
     private String nombre;
