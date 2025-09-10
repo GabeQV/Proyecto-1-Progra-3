@@ -1,4 +1,4 @@
-package hospital.presentation.lista_farmaceutas;
+package hospital.presentation.farmaceutas;
 
 import hospital.presentation.abstracts.AbstractModel;
 
