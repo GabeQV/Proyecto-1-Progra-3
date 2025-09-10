@@ -18,7 +18,6 @@ public class TableModel extends AbstractTableModel<Medico> implements javax.swin
         super(cols, rows);
     }
 
-
     @Override
     protected void initColNames() {
         colNames = new String[5];
