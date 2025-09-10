@@ -21,7 +21,6 @@ public class MedicosView implements PropertyChangeListener {
     private JButton borrarButton;
     private JTextField busquedaField;
     private JButton buscarButton;
-    private JButton reporteButton;
     private JTable medicosTable;
 
     Controller controller;
@@ -45,10 +44,29 @@ public class MedicosView implements PropertyChangeListener {
 
             }
         });
+
         limpiarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controller.clear();
+            }
+        });
+
+        borrarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        buscarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    controller.read(busquedaField.getText());
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(MedicosPanel, ex.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         });
     }
