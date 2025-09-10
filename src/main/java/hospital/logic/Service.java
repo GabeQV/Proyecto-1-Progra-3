@@ -243,4 +243,59 @@ public class Service {
     }
 
 
+    // =============== AUTENTICACIÓN Y CONTRASEÑA ===============
+    public Usuario login(String id, String clave) throws Exception {
+
+        if ("AMD".equals(id) && "AMD".equals(clave)) {
+            return new Admin();
+        }
+
+        Usuario user = null;
+
+        user = data.getMedicos().stream()
+                .filter(u -> u.getId().equals(id) && u.getClave().equals(clave))
+                .findFirst()
+                .orElse(null);
+
+        if (user == null) {
+            user = data.getFarmaceutas().stream()
+                    .filter(u -> u.getId().equals(id) && u.getClave().equals(clave))
+                    .findFirst()
+                    .orElse(null);
+        }
+
+
+        if (user == null) throw new Exception("Usuario o clave incorrecta");
+
+        return user;
+    }
+
+    public void cambiarClave(String id, String claveActual, String nuevaClave, String nuevaClaveConfirm) throws Exception {
+
+        if ("AMD".equals(id)) {
+            throw new Exception("No es posible cambiar la clave del administrador especial.");
+        }
+
+        Usuario user = null;
+
+        user = data.getMedicos().stream()
+                .filter(u -> u.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+
+        if (user == null) user = data.getFarmaceutas().stream()
+                .filter(u -> u.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+
+        if (user == null) throw new Exception("Usuario no encontrado");
+
+        if (!user.getClave().equals(claveActual)) throw new Exception("La clave actual no es correcta");
+
+        if (!nuevaClave.equals(nuevaClaveConfirm)) throw new Exception("La nueva clave no coincide");
+
+        user.setClave(nuevaClave);
+        stop();
+    }
+
 }

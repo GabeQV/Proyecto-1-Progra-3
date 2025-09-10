@@ -1,6 +1,7 @@
 package hospital.presentation.login;
 
 import hospital.logic.Sesion;
+import hospital.presentation.login.cambio_clave.CambioClaveView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -16,6 +17,22 @@ public class LoginView  {
     private JButton loginButton;
     private JButton cancelarButton;
     private JButton cambiarClaveButton;
+
+
+    public LoginView() {
+        cambiarClaveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String userId = idField.getText();
+                if (userId.isEmpty()) {
+                    JOptionPane.showMessageDialog(LoginPanel, "Debe ingresar su ID primero", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                CambioClaveView dialog = new CambioClaveView((JFrame) SwingUtilities.getWindowAncestor(LoginPanel), userId);
+                dialog.setVisible(true);
+            }
+        });
+    }
 
     public JPanel getLoginPanel() {return LoginPanel;}
 
