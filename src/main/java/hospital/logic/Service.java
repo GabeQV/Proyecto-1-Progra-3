@@ -120,5 +120,62 @@ public class Service {
     }
 
 
+    // =============== RECETAS ===============
+    public void createReceta(Receta e) throws Exception {
+        Receta result = data.getRecetas().stream()
+                .filter(i -> i.getId().equals(e.getId()))
+                .findFirst()
+                .orElse(null);
+        if (result == null) {
+            data.getRecetas().add(e);
+        } else {
+            throw new Exception("Receta ya existe");
+        }
+    }
+
+    public Receta readReceta(Receta e) throws Exception {
+        Receta result = data.getRecetas().stream()
+                .filter(i -> i.getId().equals(e.getId()))
+                .findFirst()
+                .orElse(null);
+        if (result != null) {
+            return result;
+        } else {
+            throw new Exception("Receta no existe");
+        }
+    }
+    public List<Receta> findAllRecetas() {
+        return data.getRecetas();
+    }
+
+    // =============== MEDICAMENTOS ===============
+
+    public void createMedicamento(Medicamento e) throws Exception {
+        Medicamento result = data.getMedicamentos().stream()
+                .filter(i -> i.getId().equals(e.getId()))
+                .findFirst()
+                .orElse(null);
+        if (result == null) {
+            data.getMedicamentos().add(e);
+        } else {
+            throw new Exception("Medicamento ya existe");
+        }
+    }
+
+    public Medicamento readMedicamento(Medicamento e) throws Exception {
+        Medicamento result = data.getMedicamentos().stream()
+                .filter(i -> i.getId().equals(e.getId()))
+                .findFirst()
+                .orElse(null);
+        if (result != null) {
+            return result;
+        } else {
+            throw new Exception("Medicamento no existe");
+        }
+    }
+    public List<Medicamento> findAllMedicamentos() {
+        return data.getMedicamentos();
+    }
+
 
 }
