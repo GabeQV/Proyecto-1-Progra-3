@@ -45,6 +45,9 @@ public class LoginView  {
                     Sesion.instance().setUsuarioActual(user);
                     JOptionPane.showMessageDialog(LoginPanel, "Bienvenido " + user.getNombre(), "Login exitoso", JOptionPane.INFORMATION_MESSAGE);
 
+                    JFrame window = (JFrame) SwingUtilities.getWindowAncestor(LoginPanel);
+                    window.dispose();
+
                     Sesion.instance().abrirVentanaPrincipal();
 
                 } catch (Exception ex) {

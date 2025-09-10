@@ -1,5 +1,9 @@
 package hospital.logic;
 
+import hospital.presentation.dashboard.DashboardView;
+
+import javax.swing.*;
+
 public class Sesion {
     private static Sesion theInstance;
     private Usuario usuarioActual;
@@ -20,6 +24,42 @@ public class Sesion {
     }
 
     public void abrirVentanaPrincipal() {
+        Usuario user = getUsuarioActual();
+        if (user == null) return;
+
+        JFrame mainWindow = new JFrame();
+        mainWindow.setSize(750,500);
+        mainWindow.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        mainWindow.setTitle("Hospital" + " " + user.getNombre() + " " + user.getId());
+
+        JTabbedPane tabbedPane = new JTabbedPane();
+
+        switch(user.getTipo()) {
+            case "ADMINISTRADOR":
+
+                //MVC de Medicos
+                hospital.presentation.medicos.MedicosView medicosView = new hospital.presentation.medicos.MedicosView();
+                hospital.presentation.medicos.Model medicosModel = new hospital.presentation.medicos.Model();
+                hospital.presentation.medicos.Controller medicosController = new hospital.presentation.medicos.Controller(medicosView, medicosModel);
+                tabbedPane.addTab("Medicos", medicosView.getMedicosPanel());
+
+                //MVC de Farmaceutas
+                hospital.presentation.farmaceutas.FarmaceutasView farmaceutasView = new hospital.presentation.farmaceutas.FarmaceutasView();
+                hospital.presentation.farmaceutas.Model farmaceutasModel = new hospital.presentation.farmaceutas.Model();
+                hospital.presentation.farmaceutas.Controller farmaceutasController = new hospital.presentation.farmaceutas.Controller(farmaceutasView, farmaceutasModel);
+                tabbedPane.addTab("Farmaceutas", farmaceutasView.getFarmaceutasPanel());
+
+                //MVC de Pacientes
+                hospital.presentation.pacientes.PacientesView pacientesView = new hospital.presentation.pacientes.PacientesView();
+                hospital.presentation.pacientes.Model pacientesModel = new hospital.presentation.pacientes.Model();
+                hospital.presentation.pacientes.Controller pacientesController = new hospital.presentation.pacientes.Controller(pacientesView, pacientesModel);
+                tabbedPane.addTab("Pacientes", pacientesView.getPacientesPanel());
+
+        }
+
+        mainWindow.setContentPane(tabbedPane);
+        mainWindow.setLocationRelativeTo(null);
+        mainWindow.setVisible(true);
 
     }
 

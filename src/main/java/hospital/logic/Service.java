@@ -246,7 +246,7 @@ public class Service {
     // =============== AUTENTICACIÓN Y CONTRASEÑA ===============
     public Usuario login(String id, String clave) throws Exception {
 
-        if ("AMD".equals(id) && "AMD".equals(clave)) {
+        if ("ADM".equals(id) && "ADM".equals(clave)) {
             return new Admin();
         }
 
@@ -271,7 +271,7 @@ public class Service {
 
     public void cambiarClave(String id, String claveActual, String nuevaClave, String nuevaClaveConfirm) throws Exception {
 
-        if ("AMD".equals(id)) {
+        if ("ADM".equals(id)) {
             throw new Exception("No es posible cambiar la clave del administrador especial.");
         }
 
