@@ -1,7 +1,10 @@
-package hospital.presentation.medicos;
+package hospital.presentation.farmaceutas;
 
 import hospital.Main;
-import hospital.logic.Medico;
+import hospital.logic.Farmaceuta;
+import hospital.presentation.farmaceutas.Controller;
+import hospital.presentation.farmaceutas.Model;
+import hospital.presentation.farmaceutas.TableModel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -11,11 +14,9 @@ import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class MedicosView implements PropertyChangeListener {
-    private JPanel MedicosPanel;
-    private JPanel Medico;
+public class FarmaceutasView implements PropertyChangeListener {
+    private JPanel Farmaceuta;
     private JLabel idLabel;
-    private JTextField especialidadField;
     private JTextField idField;
     private JTextField nombreField;
     private JButton guardarButton;
@@ -23,27 +24,25 @@ public class MedicosView implements PropertyChangeListener {
     private JButton borrarButton;
     private JTextField busquedaField;
     private JButton buscarButton;
-    private JTable medicosTable;
+    private JTable farmaceutasTable;
+    private JPanel FarmaceutasPanel;
 
     Controller controller;
     Model model;
 
-
-    public MedicosView() {
+    public FarmaceutasView() {
         guardarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (validate()) {
-                    Medico n = take();
+                    Farmaceuta n = take();
                     try {
                         controller.create(n);
-                        JOptionPane.showMessageDialog(MedicosPanel, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(FarmaceutasPanel, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(MedicosPanel, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(FarmaceutasPanel, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
                     }
-
                 }
-
             }
         });
 
@@ -57,19 +56,19 @@ public class MedicosView implements PropertyChangeListener {
         borrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Medico n =  model.getCurrent();
+                Farmaceuta n =  model.getCurrent();
                 if (n.getId() == null || n.getId().isEmpty()) {
-                    JOptionPane.showMessageDialog(MedicosPanel, "Seleccione un médico para borrar", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(FarmaceutasPanel, "Seleccione un farmaceuta para borrar", "ERROR", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
-                int confirm = JOptionPane.showConfirmDialog(MedicosPanel, "¿Está seguro de borrar este médico?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                int confirm = JOptionPane.showConfirmDialog(FarmaceutasPanel, "¿Está seguro de borrar este farmaceuta?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
                     try {
                         controller.delete(n);
-                        JOptionPane.showMessageDialog(MedicosPanel, "Médico eliminado", "", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(FarmaceutasPanel, "Farmaceuta eliminado", "", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(MedicosPanel, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(FarmaceutasPanel, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
                     }
                 }
 
@@ -82,18 +81,18 @@ public class MedicosView implements PropertyChangeListener {
                 try {
                     controller.read(busquedaField.getText());
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(MedicosPanel, ex.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(FarmaceutasPanel, ex.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });
 
 
-        medicosTable.addMouseListener(new MouseAdapter() {
+        farmaceutasTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2 && medicosTable.getSelectedRow() != -1) {
-                    int row = medicosTable.getSelectedRow();
-                    Medico seleccionado = ((TableModel) medicosTable.getModel()).getRowAt(row);
+                if (e.getClickCount() == 2 && farmaceutasTable.getSelectedRow() != -1) {
+                    int row = farmaceutasTable.getSelectedRow();
+                    Farmaceuta seleccionado = ((TableModel) farmaceutasTable.getModel()).getRowAt(row);
                     controller.model.setCurrent(seleccionado);
                 }
             }
@@ -104,26 +103,23 @@ public class MedicosView implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
             case Model.LIST:
-                int[] cols = {TableModel.ID, TableModel.NOMBRE, TableModel.ESPECIALIDAD};
-                medicosTable.setModel(new TableModel(cols, model.getList()));
+                int[] cols = {TableModel.ID, TableModel.NOMBRE};
+                farmaceutasTable.setModel(new TableModel(cols, model.getList()));
                 break;
             case Model.CURRENT:
-                Medico m = model.getCurrent();
+                Farmaceuta m = model.getCurrent();
                 idField.setText(m.getId());
                 nombreField.setText(m.getNombre());
-                especialidadField.setText(m.getEspecialidad());
                 break;
         }
-        MedicosPanel.revalidate();
+        FarmaceutasPanel.revalidate();
     }
 
-
-    public Medico take() {
-        Medico e = new Medico();
+    public Farmaceuta take() {
+        Farmaceuta e = new Farmaceuta();
         e.setId(idField.getText());
         e.setClave(idField.getText());
         e.setNombre(nombreField.getText());
-        e.setEspecialidad(especialidadField.getText());
         return e;
     }
 
@@ -146,19 +142,10 @@ public class MedicosView implements PropertyChangeListener {
             nombreField.setBackground(null);
             nombreField.setToolTipText(null);
         }
-
-        if (especialidadField.getText().isEmpty()) {
-            valid = false;
-            especialidadField.setBackground(Main.BACKGROUND_ERROR);
-            especialidadField.setToolTipText("Departamento requerido");
-        } else {
-            especialidadField.setBackground(null);
-            especialidadField.setToolTipText(null);
-        }
         return valid;
     }
 
-    public JPanel getMedicosPanel() {return MedicosPanel;}
+    public JPanel getFarmaceutasPanel() {return FarmaceutasPanel;}
 
     public void setController(Controller controller) {
         this.controller = controller;

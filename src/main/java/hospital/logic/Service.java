@@ -57,6 +57,19 @@ public class Service {
             throw new Exception("Medico no existe");
         }
     }
+
+    public void deleteMedico(Medico e) throws Exception {
+        Medico result = data.getMedicos().stream()
+                .filter(i -> i.getId().equals(e.getId()))
+                .findFirst()
+                .orElse(null);
+        if (result != null) {
+            data.getMedicos().remove(result);
+        } else {
+            throw new Exception("Medico no existe");
+        }
+    }
+
     public List<Medico> findAllMedicos() {
         return data.getMedicos();
     }
@@ -86,6 +99,19 @@ public class Service {
             throw new Exception("Farmaceuta no existe");
         }
     }
+
+    public void deleteFarmaceuta(Farmaceuta e) throws Exception {
+        Farmaceuta result = data.getFarmaceutas().stream()
+                .filter(i -> i.getId().equals(e.getId()))
+                .findFirst()
+                .orElse(null);
+        if (result != null) {
+            data.getFarmaceutas().remove(result);
+        } else {
+            throw new Exception("Farmaceuta no existe");
+        }
+    }
+
     public List<Farmaceuta> findAllFarmaceutas() {
         return data.getFarmaceutas();
     }
@@ -115,6 +141,19 @@ public class Service {
             throw new Exception("Paciente no existe");
         }
     }
+
+    public void deletePaciente(Paciente e) throws Exception {
+        Paciente result = data.getPacientes().stream()
+                .filter(i -> i.getId().equals(e.getId()))
+                .findFirst()
+                .orElse(null);
+        if (result != null) {
+            data.getPacientes().remove(result);
+        } else {
+            throw new Exception("Paciente no existe");
+        }
+    }
+
     public List<Paciente> findAllPacientes() {
         return data.getPacientes();
     }
@@ -144,6 +183,19 @@ public class Service {
             throw new Exception("Receta no existe");
         }
     }
+
+    public void deleteRecetas(Receta e) throws Exception {
+        Receta result = data.getRecetas().stream()
+                .filter(i -> i.getId().equals(e.getId()))
+                .findFirst()
+                .orElse(null);
+        if (result != null) {
+            data.getRecetas().remove(result);
+        } else {
+            throw new Exception("Receta no existe");
+        }
+    }
+
     public List<Receta> findAllRecetas() {
         return data.getRecetas();
     }
@@ -173,9 +225,76 @@ public class Service {
             throw new Exception("Medicamento no existe");
         }
     }
+
+    public void deleteMedicamento(Medicamento e) throws Exception {
+        Medicamento result = data.getMedicamentos().stream()
+                .filter(i -> i.getId().equals(e.getId()))
+                .findFirst()
+                .orElse(null);
+        if (result != null) {
+            data.getMedicamentos().remove(result);
+        } else {
+            throw new Exception("Medicamento no existe");
+        }
+    }
+
     public List<Medicamento> findAllMedicamentos() {
         return data.getMedicamentos();
     }
 
+
+    // =============== AUTENTICACIÓN Y CONTRASEÑA ===============
+    public Usuario login(String id, String clave) throws Exception {
+
+        if ("ADM".equals(id) && "ADM".equals(clave)) {
+            return new Admin();
+        }
+
+        Usuario user = null;
+
+        user = data.getMedicos().stream()
+                .filter(u -> u.getId().equals(id) && u.getClave().equals(clave))
+                .findFirst()
+                .orElse(null);
+
+        if (user == null) {
+            user = data.getFarmaceutas().stream()
+                    .filter(u -> u.getId().equals(id) && u.getClave().equals(clave))
+                    .findFirst()
+                    .orElse(null);
+        }
+
+        if (user == null) throw new Exception("Usuario o clave incorrecta");
+
+        return user;
+    }
+
+    public void cambiarClave(String id, String claveActual, String nuevaClave, String nuevaClaveConfirm) throws Exception {
+
+        if ("ADM".equals(id)) {
+            throw new Exception("No es posible cambiar la clave del administrador especial.");
+        }
+
+        Usuario user = null;
+
+        user = data.getMedicos().stream()
+                .filter(u -> u.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+
+        if (user == null) user = data.getFarmaceutas().stream()
+                .filter(u -> u.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+
+        if (user == null) throw new Exception("Usuario no encontrado");
+
+        if (!user.getClave().equals(claveActual)) throw new Exception("La clave actual no es correcta");
+
+        if (!nuevaClave.equals(nuevaClaveConfirm)) throw new Exception("La nueva clave no coincide");
+
+        user.setClave(nuevaClave);
+        stop();
+    }
 
 }

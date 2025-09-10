@@ -24,17 +24,26 @@ public class Controller {
     public void read(String id) throws Exception {
         Medico e = new Medico();
         e.setId(id);
-        try {
-            model.setCurrent(Service.instance().readMedico(e));
-        } catch (Exception ex) {
-            Medico b = new Medico();
-            b.setId(id);
-            model.setCurrent(b);
-            throw ex;
+        if(Service.instance().readMedico(e)!=null){
+            try {
+                model.setCurrent(Service.instance().readMedico(e));
+            } catch (Exception ex) {
+                Medico b = new Medico();
+                b.setId(id);
+                model.setCurrent(b);
+                throw ex;
+            }
         }
+
     }
 
     public void clear() {
         model.setCurrent(new Medico());
+    }
+
+    public void delete(Medico e) throws Exception{
+        Service.instance().deleteMedico(e);
+        model.setCurrent(new Medico());
+        model.setList(Service.instance().findAllMedicos());
     }
 }
