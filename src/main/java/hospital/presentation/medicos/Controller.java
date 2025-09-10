@@ -40,4 +40,10 @@ public class Controller {
     public void clear() {
         model.setCurrent(new Medico());
     }
+
+    public void delete(Medico e) throws Exception{
+        Service.instance().deleteMedico(e);
+        model.setCurrent(new Medico());
+        model.setList(Service.instance().findAllMedicos());
+    }
 }

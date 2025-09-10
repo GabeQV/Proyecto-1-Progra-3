@@ -6,6 +6,8 @@ import hospital.logic.Medico;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -55,6 +57,21 @@ public class MedicosView implements PropertyChangeListener {
         borrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Medico n =  model.getCurrent();
+                if (n.getId() == null || n.getId().isEmpty()) {
+                    JOptionPane.showMessageDialog(MedicosPanel, "Seleccione un médico para borrar", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                int confirm = JOptionPane.showConfirmDialog(MedicosPanel, "¿Está seguro de borrar este médico?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                if (confirm == JOptionPane.YES_OPTION) {
+                    try {
+                        controller.delete(n);
+                        JOptionPane.showMessageDialog(MedicosPanel, "Médico eliminado", "", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(MedicosPanel, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
 
             }
         });
@@ -66,6 +83,18 @@ public class MedicosView implements PropertyChangeListener {
                     controller.read(busquedaField.getText());
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(MedicosPanel, ex.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        });
+
+
+        medicosTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2 && medicosTable.getSelectedRow() != -1) {
+                    int row = medicosTable.getSelectedRow();
+                    Medico seleccionado = ((TableModel) medicosTable.getModel()).getRowAt(row);
+                    controller.model.setCurrent(seleccionado);
                 }
             }
         });
