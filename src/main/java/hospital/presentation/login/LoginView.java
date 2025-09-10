@@ -1,6 +1,8 @@
 package hospital.presentation.login;
 
+import hospital.logic.Service;
 import hospital.logic.Sesion;
+import hospital.logic.Usuario;
 import hospital.presentation.login.cambio_clave.CambioClaveView;
 
 import javax.swing.*;
@@ -30,6 +32,25 @@ public class LoginView  {
                 }
                 CambioClaveView dialog = new CambioClaveView((JFrame) SwingUtilities.getWindowAncestor(LoginPanel), userId);
                 dialog.setVisible(true);
+            }
+        });
+
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String id = idField.getText();
+                String clave = claveField.getText();
+                try {
+                    Usuario user = Service.instance().login(id, clave);
+                    Sesion.instance().setUsuarioActual(user);
+                    JOptionPane.showMessageDialog(LoginPanel, "Bienvenido " + user.getNombre(), "Login exitoso", JOptionPane.INFORMATION_MESSAGE);
+
+                    Sesion.instance().abrirVentanaPrincipal();
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(LoginPanel, ex.getMessage(), "Error de login", JOptionPane.ERROR_MESSAGE);
+                }
+
             }
         });
     }

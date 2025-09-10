@@ -264,7 +264,6 @@ public class Service {
                     .orElse(null);
         }
 
-
         if (user == null) throw new Exception("Usuario o clave incorrecta");
 
         return user;
