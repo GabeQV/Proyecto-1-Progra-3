@@ -1,7 +1,6 @@
-package hospital.presentation.despacho;
+package hospital.presentation.medicos;
 
 import hospital.logic.Medico;
-import hospital.logic.Receta;
 import hospital.presentation.abstracts.AbstractModel;
 
 import java.beans.PropertyChangeListener;
@@ -9,16 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Model extends AbstractModel {
-
-    Receta current;
-    List<Receta> list;
+    Medico current;
+    List<Medico> list;
 
     public static final String CURRENT = "current";
     public static final String LIST = "list";
 
 
     public Model() {
-        current = new Receta();
+        current = new Medico();
         list = new ArrayList<>();
     }
 
@@ -29,18 +27,18 @@ public class Model extends AbstractModel {
         firePropertyChange(LIST);
     }
 
-    public Receta getCurrent() {return current;}
+    public Medico getCurrent() {return current;}
 
-    public void setCurrent(Receta current) {
+    public void setCurrent(Medico current) {
         this.current = current;
         firePropertyChange(CURRENT);
     }
 
-    public List<Receta> getList() {
+    public List<Medico> getList() {
         return list;
     }
 
-    public void setList(List<Receta> list) {
+    public void setList(List<Medico> list) {
         this.list = list;
         firePropertyChange(LIST);
     }
