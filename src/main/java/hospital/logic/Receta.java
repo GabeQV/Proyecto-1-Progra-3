@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 package hospital.logic;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
@@ -22,6 +17,11 @@ public class Receta {
     private String cantidad;
     @XmlElement
     private String duracion;
+    @XmlElement
+    private String estado;
+    @XmlIDREF
+    @XmlElement
+    private Usuario usuario;
     @XmlIDREF
     @XmlElement
     private Medicamento medicamento;
@@ -29,12 +29,13 @@ public class Receta {
     public Receta() {
     }
 
-    public Receta(String id, String indicaciones, String cantidad, String duracion, Medicamento medicamento) {
+    public Receta(String id, String indicaciones, String cantidad, String duracion,String estado, Medicamento medicamento) {
         this.id = id;
         this.indicaciones = indicaciones;
         this.cantidad = cantidad;
         this.duracion = duracion;
         this.medicamento = medicamento;
+        this.estado = estado;
     }
 
     public String getCantidad() {
@@ -72,8 +73,11 @@ public class Receta {
     public String getId() {
         return this.id;
     }
-
     public void setId(String id) {
         this.id = id;
     }
+
+    public String getEstado() {return this.estado;}
+    public void setEstado(String estado) {this.estado = estado;}
+
 }
