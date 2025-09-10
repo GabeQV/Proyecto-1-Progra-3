@@ -33,7 +33,7 @@
           <component id="994e" class="javax.swing.JTextField" binding="textField1" default-binding="true">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
+                <preferred-size width="150" height="25"/>
               </grid>
             </constraints>
             <properties>
@@ -66,7 +66,7 @@
           <scrollpane id="75018">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="5" vsize-policy="7" hsize-policy="3" anchor="0" fill="2" indent="0" use-parent-layout="false">
-                <preferred-size width="500" height="200"/>
+                <preferred-size width="500" height="250"/>
               </grid>
             </constraints>
             <properties/>
