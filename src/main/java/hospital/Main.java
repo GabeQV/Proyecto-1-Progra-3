@@ -1,14 +1,9 @@
 package hospital;
 
-import hospital.logic.Paciente;
 import hospital.logic.Service;
-import hospital.presentation.despacho.DespachoView;
-import hospital.presentation.login.LoginView;
-import hospital.presentation.lista_pacientes.ListaPacientesView;
-import hospital.logic.Paciente.*;
-import hospital.presentation.medicos.Controller;
-import hospital.presentation.medicos.MedicosView;
-import hospital.presentation.medicos.Model;
+import hospital.presentation.farmaceutas.Controller;
+import hospital.presentation.farmaceutas.FarmaceutasView;
+import hospital.presentation.farmaceutas.Model;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,17 +17,16 @@ public class Main {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");}
         catch (Exception ex) {};
 
-        MedicosView view = new MedicosView();
+        FarmaceutasView view = new FarmaceutasView();
         Model model = new Model();
         Controller controller = new Controller(view, model);
-
 
 
         JFrame window = new JFrame();
         window.setSize(700,500);
         window.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         window.setTitle("Hospital");
-        window.setContentPane(view.getMedicosPanel());
+        window.setContentPane(view.getFarmaceutasPanel());
 
         window.setLocationRelativeTo(null);
 
