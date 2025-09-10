@@ -19,6 +19,10 @@ public class Sesion {
         return usuarioActual;
     }
 
+    public void abrirVentanaPrincipal() {
+
+    }
+
     public void cerrarSesion() {
         this.usuarioActual = null;
     }
