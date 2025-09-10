@@ -17,11 +17,6 @@ public class Controller {
 
     public void create(Medico e) throws  Exception{
         Service.instance().createMedico(e);
-        if (e.getId() == null || e.getId().trim().isEmpty() || e.getId().contains(" ")) {
-            throw new Exception("El ID no puede estar vacío, repetido o contener espacios");
-        }
-
-        System.out.println("Guardando médico: " + e.getId() + " - " + e.getNombre() + " - " + e.getEspecialidad() + " - " + e.getClave());
         model.setCurrent(new Medico());
         model.setList(Service.instance().findAllMedicos());
     }
