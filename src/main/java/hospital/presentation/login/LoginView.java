@@ -1,8 +1,13 @@
 package hospital.presentation.login;
 
-import javax.swing.*;
+import hospital.logic.Sesion;
 
-public class LoginView {
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+
+public class LoginView  {
     private JPanel LoginPanel;
     private JTextField idField;
     private JTextField claveField;
@@ -13,4 +18,6 @@ public class LoginView {
     private JButton cambiarClaveButton;
 
     public JPanel getLoginPanel() {return LoginPanel;}
+
+
 }

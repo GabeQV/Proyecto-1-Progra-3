@@ -1,5 +1,11 @@
 package hospital.logic;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Medico extends Usuario {
 
     private String especialidad;
@@ -8,6 +14,11 @@ public class Medico extends Usuario {
         super(id, clave, nombre);
         this.especialidad = especialidad;
     }
+
+    public Medico(){
+        this("","","","");
+    }
+
 
     public String getEspecialidad() {
         return especialidad;
@@ -18,5 +29,7 @@ public class Medico extends Usuario {
         return "MEDICO";
     }
 
-
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
+    }
 }

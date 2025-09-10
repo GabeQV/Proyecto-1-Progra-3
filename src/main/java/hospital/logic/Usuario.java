@@ -1,9 +1,19 @@
 package hospital.logic;
 
+import jakarta.xml.bind.annotation.*;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlSeeAlso({Medico.class, Paciente.class, Farmaceuta.class})
 public abstract class Usuario {
+    @XmlElement
+    @XmlID
     protected String id;
+    @XmlElement
     protected String clave;
+    @XmlElement
     protected String nombre;
+
+    protected Usuario(){}
 
     public Usuario(String id, String clave, String nombre) {
         this.id = id;
