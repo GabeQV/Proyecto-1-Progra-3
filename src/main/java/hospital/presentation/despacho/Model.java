@@ -44,4 +44,5 @@ public class Model extends AbstractModel {
         this.list = list;
         firePropertyChange(LIST);
     }
+
 }

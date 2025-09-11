@@ -201,7 +201,6 @@ public class Service {
     }
 
     // =============== MEDICAMENTOS ===============
-
     public void createMedicamento(Medicamento e) throws Exception {
         Medicamento result = data.getMedicamentos().stream()
                 .filter(i -> i.getId().equals(e.getId()))
