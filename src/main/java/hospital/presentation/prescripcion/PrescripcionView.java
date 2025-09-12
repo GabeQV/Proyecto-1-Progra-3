@@ -1,5 +1,7 @@
 package hospital.presentation.prescripcion;
 
+import com.github.lgooddatepicker.components.DatePicker;
+
 import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 
@@ -16,34 +18,44 @@ public class PrescripcionView{
     private JButton limpiarButton;
     private JButton descartarMedicamentoButton;
     private JButton detallesButton;
-    private JTextField fechaDeRetiroTextField;
     private JLabel mostrarPacienteAcaLabel;
     private JTable MedicamentosTable;
     private JPanel controlRecetasPanel;
     private JPanel recetasPanel;
     private JPanel ajustesPanel;
     private JLabel fechaDeRetiroLabel;
+    private DatePicker FechaDeRetiro;
 
     public JPanel getPrescripcionPanel() {
         return PrescripcionPanel;
     }
-
+    public PrescripcionView() {
+    }
     public void setController(Controller controller) {
         this.controller = controller;
-        //buscarPacienteButton.addActionListener();
+        buscarPacienteButton.addActionListener(e -> {
+            JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(PrescripcionPanel);
+            BuscarPacienteDialog dialog = new BuscarPacienteDialog(parent);
+            dialog.setVisible(true);
+        });
 
-        agregarMedicamentoButton.addActionListener(e -> controller.agregarReceta(null));
+        agregarMedicamentoButton.addActionListener(e -> {
+            JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(PrescripcionPanel);
+            AgregarMedicamentoDialog dialog = new AgregarMedicamentoDialog(parent);
+            dialog.setVisible(true);
+            // Optionally: get selected medicine from dialog here
+        });
+
         descartarMedicamentoButton.addActionListener(e -> controller.borrarReceta(MedicamentosTable.getSelectedRow()));
         guardarButton.addActionListener(e -> {
             try {
-                controller.guardarRecetas(fechaDeRetiroTextField.getText());
+                controller.guardarRecetas(FechaDeRetiro.getText());
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
         });
         limpiarButton.addActionListener(e -> controller.clear());
         detallesButton.addActionListener(e -> controller.mostrarDetalles(MedicamentosTable.getSelectedRow()));
-
     }
 
     public void setModel(Model model) {
@@ -60,7 +72,7 @@ public class PrescripcionView{
                 ));
                 break;
             case Model.CURRENT:
-                // Nose chaval
+                // TODO: NO SE AAAHHHH
                 break;
         }
     }
