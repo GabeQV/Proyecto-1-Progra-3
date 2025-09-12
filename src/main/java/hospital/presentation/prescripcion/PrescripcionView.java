@@ -30,10 +30,7 @@ public class PrescripcionView{
 
     public void setController(Controller controller) {
         this.controller = controller;
-        buscarPacienteButton.addActionListener(e -> {
-            String pacienteId = mostrarPacienteAcaTextField.getText();
-            controller.buscarPaciente(pacienteId);
-        });
+        //buscarPacienteButton.addActionListener();
 
         agregarMedicamentoButton.addActionListener(e -> controller.agregarReceta(null));
         descartarMedicamentoButton.addActionListener(e -> controller.borrarReceta(MedicamentosTable.getSelectedRow()));
