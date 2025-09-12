@@ -17,12 +17,11 @@ public class PrescripcionView{
     private JButton descartarMedicamentoButton;
     private JButton detallesButton;
     private JTextField fechaDeRetiroTextField;
-    private JTextField mostrarPacienteAcaTextField;
+    private JLabel mostrarPacienteAcaLabel;
     private JTable MedicamentosTable;
     private JPanel controlRecetasPanel;
     private JPanel recetasPanel;
     private JPanel ajustesPanel;
-    private JLabel nombrePacienteLabel;
     private JLabel fechaDeRetiroLabel;
 
     public JPanel getPrescripcionPanel() {
