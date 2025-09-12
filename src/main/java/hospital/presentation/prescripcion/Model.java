@@ -19,6 +19,7 @@ public class Model extends AbstractModel {
     public Model() {
         current = new Receta();
         list = new ArrayList<>();
+        tableModel = new RecetaTableModel(new int[]{0,1,2,3,4}, list);
     }
 
     public Receta getCurrent() { return current; }
