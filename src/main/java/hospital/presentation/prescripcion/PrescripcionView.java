@@ -3,7 +3,7 @@ package hospital.presentation.prescripcion;
 import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 
-public class PrescripcionView {
+public class PrescripcionView{
     Controller controller;
     Model model;
 
@@ -20,22 +20,41 @@ public class PrescripcionView {
     private JTextField mostrarPacienteAcaTextField;
     private JTable MedicamentosTable;
 
-    public JPanel getDashboardPanel() {
+    public JPanel getPrescripcionPanel() {
         return PrescripcionPanel;
     }
 
     public void setController(Controller controller) {
         this.controller = controller;
+        buscarPacienteButton.addActionListener(e -> {
+            String pacienteId = mostrarPacienteAcaTextField.getText();
+            controller.buscarPaciente(pacienteId);
+        });
+
+        agregarMedicamentoButton.addActionListener(e -> controller.agregarReceta(null));
+        descartarMedicamentoButton.addActionListener(e -> controller.borrarReceta(MedicamentosTable.getSelectedRow()));
+        guardarButton.addActionListener(e -> {
+            try {
+                controller.guardarRecetas(fechaDeRetiroTextField.getText());
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        limpiarButton.addActionListener(e -> controller.clear());
+        detallesButton.addActionListener(e -> controller.mostrarDetalles(MedicamentosTable.getSelectedRow()));
+
     }
 
     public void setModel(Model model) {
         this.model = model;
+        MedicamentosTable.setModel(model.getTableModel());
     }
+
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
             case Model.LIST:
-                MedicamentosTable.setModel(new TableModel(
-                        new int[]{TableModel.ID, TableModel.NOMBRE, TableModel.PRESENTACION},
+                MedicamentosTable.setModel(new RecetaTableModel(
+                        new int[]{RecetaTableModel.ID},
                         model.getList()
                 ));
                 break;
