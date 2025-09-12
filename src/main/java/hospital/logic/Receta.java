@@ -24,6 +24,9 @@ public class Receta {
     private Usuario usuario;
     @XmlIDREF
     @XmlElement
+    private Paciente paciente;
+    @XmlIDREF
+    @XmlElement
     private Medicamento medicamento;
 
     public Receta() {
@@ -79,5 +82,11 @@ public class Receta {
 
     public String getEstado() {return this.estado;}
     public void setEstado(String estado) {this.estado = estado;}
+
+    public Usuario getUsuario() { return usuario; }
+    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
+
+    public Paciente getPaciente() { return paciente; }
+    public void setPaciente(Paciente paciente) { this.paciente = paciente; }
 
 }

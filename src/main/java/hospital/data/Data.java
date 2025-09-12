@@ -39,9 +39,14 @@ public class Data {
 
         //medicos.add(new Medico("111","111","Juan Perez","Odontologia"));
         //pacientes.add(new Paciente("123","123","Carlos Gutierrez", LocalDate.of(1998,9,16),"89677869"));
+
         Medicamento Acetaminofen = new Medicamento("111","Acetaminofen","150 mg");
         medicamentos.add(Acetaminofen);
-        recetas.add(new Receta("123","Tarde y noche","5","8 dias","Confeccionado", Acetaminofen));
+        Paciente p = new Paciente("P123","Carlos Gutierrez", LocalDate.of(1998,9,16),"89677869");
+        pacientes.add(p);
+        Receta r = new Receta("123","Tarde y noche","5","8 dias","Confeccionado", Acetaminofen);
+        r.setPaciente(p);
+        recetas.add(r);
     }
 
     public List<Medico> getMedicos() {return medicos;}
