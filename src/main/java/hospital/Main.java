@@ -6,9 +6,9 @@ import hospital.presentation.despacho.DespachoView;
 import hospital.presentation.login.LoginView;
 //import hospital.presentation.lista_pacientes.ListaPacientesView;
 import hospital.logic.Paciente.*;
-import hospital.presentation.medicos.Controller;
+import hospital.presentation.despacho.Controller;
 import hospital.presentation.medicos.MedicosView;
-import hospital.presentation.medicos.Model;
+import hospital.presentation.despacho.Model;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,17 +22,17 @@ public class Main {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");}
         catch (Exception ex) {};
 
-        MedicosView view = new MedicosView();
+        DespachoView view = new DespachoView();
         Model model = new Model();
         Controller controller = new Controller(view, model);
 
 
 
         JFrame window = new JFrame();
-        window.setSize(700,500);
+        window.setSize(500,400);
         window.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         window.setTitle("Hospital");
-        window.setContentPane(view.getMedicosPanel());
+        window.setContentPane(view.getDespachoView());
 
         window.setLocationRelativeTo(null);
 

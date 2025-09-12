@@ -32,7 +32,6 @@ public class Service {
         }
     }
 
-
     // =============== MEDICOS ===============
     public void createMedico(Medico e) throws Exception {
         Medico result = data.getMedicos().stream()
@@ -198,6 +197,22 @@ public class Service {
 
     public List<Receta> findAllRecetas() {
         return data.getRecetas();
+    }
+
+    public List<Receta> findRecetasByPacienteId(String pacienteId) {
+        return data.getRecetas().stream()
+                .filter(r -> r.getPaciente() != null && pacienteId.equals(r.getPaciente().getId()))
+                .toList();
+    }
+
+    public void updateReceta(Receta r) throws Exception {
+        Receta found = data.getRecetas().stream()
+                .filter(i -> i.getId().equals(r.getId()))
+                .findFirst()
+                .orElse(null);
+        if (found == null) throw new Exception("Receta no existe");
+        found.setEstado(r.getEstado());
+        stop();
     }
 
     // =============== MEDICAMENTOS ===============
