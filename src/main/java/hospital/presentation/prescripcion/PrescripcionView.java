@@ -64,7 +64,7 @@ public class PrescripcionView{
                 ));
                 break;
             case Model.CURRENT:
-                // update text fields, etc.
+                // Nose chaval
                 break;
         }
     }
