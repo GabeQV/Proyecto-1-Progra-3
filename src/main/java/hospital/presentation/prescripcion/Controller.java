@@ -12,11 +12,12 @@ public class Controller {
         this.model = model;
         view.setController(this);
         view.setModel(model);
+        model.setList(Service.instance().findAllRecetas());
     }
 
     public void agregarReceta(Receta r) {
         model.addReceta(r);
-        model.setCurrent(new Receta()); // clear current
+        model.setCurrent(new Receta());
     }
 
 

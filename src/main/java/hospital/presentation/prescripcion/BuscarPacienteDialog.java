@@ -2,11 +2,15 @@ package hospital.presentation.prescripcion;
 
 import javax.swing.*;
 import java.awt.*;
+import hospital.presentation.prescripcion.Controller;
 
 public class BuscarPacienteDialog extends JDialog {
-    public BuscarPacienteDialog(JFrame parent) {
+    private Model model;
+    public BuscarPacienteDialog(JFrame parent, Model model) {
+        this.model = model;
         super(parent, "Pacientes", true);
         setLayout(new BorderLayout());
+
 
         JPanel filterPanel = new JPanel();
         filterPanel.add(new JLabel("Filtrar por:"));
@@ -15,10 +19,8 @@ public class BuscarPacienteDialog extends JDialog {
         add(filterPanel, BorderLayout.NORTH);
 
         // Tabla de ejemplo otra vez
-        JTable table = new JTable(
-                new Object[][]{{"PAC-222", "Kate Castillo", "43334455", "2010-07-13"}},
-                new String[]{"Id", "Nombre", "Teléfono", "Fec. Nac."}
-        );
+        JTable table = new JTable();
+        table.setModel(model.getTableModel());
         add(new JScrollPane(table), BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel();

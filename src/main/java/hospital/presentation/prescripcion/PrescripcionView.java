@@ -1,6 +1,7 @@
 package hospital.presentation.prescripcion;
 
 import com.github.lgooddatepicker.components.DatePicker;
+import hospital.presentation.despacho.TableModel;
 
 import javax.swing.*;
 import java.beans.PropertyChangeEvent;
@@ -35,7 +36,7 @@ public class PrescripcionView{
         this.controller = controller;
         buscarPacienteButton.addActionListener(e -> {
             JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(PrescripcionPanel);
-            BuscarPacienteDialog dialog = new BuscarPacienteDialog(parent);
+            BuscarPacienteDialog dialog = new BuscarPacienteDialog(parent, model);
             dialog.setVisible(true);
         });
 
@@ -65,11 +66,16 @@ public class PrescripcionView{
 
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
-            case Model.LIST:
-                MedicamentosTable.setModel(new RecetaTableModel(
-                        new int[]{RecetaTableModel.ID},
-                        model.getList()
-                ));
+            case hospital.presentation.despacho.Model.LIST:
+                int[] cols = {
+                        TableModel.MEDICAMENTO,
+                        TableModel.PRESENTACION,
+                        TableModel.CANTIDAD,
+                        TableModel.INDICACIONES,
+                        TableModel.DURACION,
+                        TableModel.ESTADO
+                };
+                MedicamentosTable.setModel(new TableModel(cols, model.getList()));
                 break;
             case Model.CURRENT:
                 // TODO: NO SE AAAHHHH
