@@ -16,6 +16,7 @@ public class Controller {
         model.setList(Service.instance().findAllRecetas());
     }
 
+
     public void agregarReceta(Receta r) {
         model.addReceta(r);
         model.setCurrentReceta(new Receta());
