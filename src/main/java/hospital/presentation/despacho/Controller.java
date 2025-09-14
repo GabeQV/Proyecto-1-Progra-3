@@ -75,6 +75,7 @@ public class Controller {
     public void revertir() throws Exception {
         Receta r = model.getCurrent();
         String estado = r.getEstado();
+
         if ("En proceso".equalsIgnoreCase(estado)) {
             r.setEstado("Confeccionado");
         } else if ("Lista".equalsIgnoreCase(estado)) {

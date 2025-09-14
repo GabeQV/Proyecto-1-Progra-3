@@ -71,12 +71,14 @@ public class DespachoView implements PropertyChangeListener {
         recetasTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 1 && recetasTable.getSelectedRow() != -1) {
+                if (e.getClickCount() == 2 && recetasTable.getSelectedRow() != -1) {
                     int row = recetasTable.getSelectedRow();
                     Receta seleccionado = ((TableModel) recetasTable.getModel()).getRowAt(row);
                     controller.model.setCurrent(seleccionado);
                 }
             }
+        });
+        recetasTable.addMouseListener(new MouseAdapter() {
         });
     }
 

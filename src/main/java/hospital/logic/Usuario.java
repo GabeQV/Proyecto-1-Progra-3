@@ -3,7 +3,7 @@ package hospital.logic;
 import jakarta.xml.bind.annotation.*;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlSeeAlso({Medico.class, Paciente.class, Farmaceuta.class})
+@XmlSeeAlso({Medico.class, Farmaceuta.class})
 public abstract class Usuario {
 
     @XmlID

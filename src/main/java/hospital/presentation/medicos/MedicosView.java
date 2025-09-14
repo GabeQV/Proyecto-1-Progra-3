@@ -2,6 +2,7 @@ package hospital.presentation.medicos;
 
 import hospital.Main;
 import hospital.logic.Medico;
+import hospital.logic.Service;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -41,7 +42,6 @@ public class MedicosView implements PropertyChangeListener {
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(MedicosPanel, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
                     }
-
                 }
 
             }

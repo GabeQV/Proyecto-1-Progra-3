@@ -108,7 +108,7 @@
               </grid>
             </constraints>
             <properties>
-              <text value=""/>
+              <text value="Revertir Estado"/>
             </properties>
           </component>
           <hspacer id="a8ea0">

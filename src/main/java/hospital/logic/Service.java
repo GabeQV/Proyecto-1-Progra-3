@@ -69,6 +69,18 @@ public class Service {
         }
     }
 
+    public void updateMedico(Medico e) throws Exception {
+        Medico found = data.getMedicos().stream()
+                .filter(i -> i.getId().equals(e.getId()))
+                .findFirst()
+                .orElse(null);
+        if (found == null) throw new Exception("Medico no existe");
+        found.setNombre(e.getNombre());
+        found.setEspecialidad(e.getEspecialidad());
+        found.setClave(e.getClave());
+        stop();
+    }
+
     public List<Medico> findAllMedicos() {
         return data.getMedicos();
     }
