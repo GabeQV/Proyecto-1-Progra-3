@@ -4,6 +4,8 @@ import com.github.lgooddatepicker.components.DatePicker;
 import hospital.presentation.despacho.TableModel;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 
 public class PrescripcionView{
@@ -32,6 +34,14 @@ public class PrescripcionView{
         return PrescripcionPanel;
     }
     public PrescripcionView() {
+        detallesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(PrescripcionPanel);
+                ModificarDetalle dialog = new ModificarDetalle(parent, model);
+                dialog.setVisible(true);
+            }
+        });
     }
     public void setController(Controller controller) {
         this.controller = controller;
@@ -56,7 +66,6 @@ public class PrescripcionView{
             }
         });
         limpiarButton.addActionListener(e -> controller.clear());
-        detallesButton.addActionListener(e -> controller.mostrarDetalles(MedicamentosTable.getSelectedRow()));
     }
 
     public void setModel(Model model) {
