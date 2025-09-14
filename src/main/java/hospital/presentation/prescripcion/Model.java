@@ -1,32 +1,33 @@
 package hospital.presentation.prescripcion;
 
+import hospital.logic.Paciente;
 import hospital.logic.Receta;
 import hospital.presentation.abstracts.AbstractModel;
 
-import javax.swing.table.TableModel;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Model extends AbstractModel {
-    Receta current;
+    Receta currentReceta;
+    Paciente currentPaciente;
     List<Receta> list;
-    RecetaTableModel tableModel;
 
-    public static final String CURRENT = "current";
+    public static final String CURRENTRECETA = "currentreceta";
+    public static final String CURRENTPACIENTE = "currentpaciente";
     public static final String LIST = "list";
     public static final String TABLE = "table";
 
     public Model() {
-        current = new Receta();
+        currentReceta = new Receta();
+        currentPaciente = new Paciente();
         list = new ArrayList<>();
-        tableModel = new RecetaTableModel(new int[]{0,1,2,3,4}, list);
     }
 
-    public Receta getCurrent() { return current; }
+    public Receta getCurrentReceta() { return currentReceta; }
 
-    public void setCurrent(Receta current) {
-        this.current = current;
-        firePropertyChange(CURRENT);
+    public void setCurrentReceta(Receta current) {
+        this.currentReceta = current;
+        firePropertyChange(CURRENTRECETA);
     }
 
     public List<Receta> getList() { return list; }
@@ -48,7 +49,12 @@ public class Model extends AbstractModel {
         }
     }
 
-    public TableModel getTableModel() {
-        return tableModel;
+    public Paciente getCurrentPaciente() {
+        return currentPaciente;
+    }
+
+    public void setCurrentPaciente(Paciente currentPaciente) {
+        this.currentPaciente = currentPaciente;
+        firePropertyChange(CURRENTPACIENTE);
     }
 }

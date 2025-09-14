@@ -1,5 +1,6 @@
 package hospital.presentation.prescripcion;
 
+import hospital.logic.Paciente;
 import hospital.logic.Receta;
 import hospital.logic.Service;
 
@@ -17,7 +18,7 @@ public class Controller {
 
     public void agregarReceta(Receta r) {
         model.addReceta(r);
-        model.setCurrent(new Receta());
+        model.setCurrentReceta(new Receta());
     }
 
 
@@ -33,7 +34,8 @@ public class Controller {
     }
 
     public void clear() {
-        model.setCurrent(new Receta());
+        model.setCurrentReceta(new Receta());
+        model.setCurrentPaciente(new Paciente());
         model.setList(new java.util.ArrayList<>());
     }
 

@@ -27,6 +27,7 @@ public class PrescripcionView{
     private JLabel fechaDeRetiroLabel;
     private DatePicker FechaDeRetiro;
 
+
     public JPanel getPrescripcionPanel() {
         return PrescripcionPanel;
     }
@@ -36,15 +37,14 @@ public class PrescripcionView{
         this.controller = controller;
         buscarPacienteButton.addActionListener(e -> {
             JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(PrescripcionPanel);
-            BuscarPacienteDialog dialog = new BuscarPacienteDialog(parent, model);
+            BuscarPaciente dialog = new BuscarPaciente(parent, model);
             dialog.setVisible(true);
         });
 
         agregarMedicamentoButton.addActionListener(e -> {
             JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(PrescripcionPanel);
-            AgregarMedicamentoDialog dialog = new AgregarMedicamentoDialog(parent);
+            AgregarMedicamento dialog = new AgregarMedicamento(parent, model);
             dialog.setVisible(true);
-            // Optionally: get selected medicine from dialog here
         });
 
         descartarMedicamentoButton.addActionListener(e -> controller.borrarReceta(MedicamentosTable.getSelectedRow()));
@@ -61,7 +61,6 @@ public class PrescripcionView{
 
     public void setModel(Model model) {
         this.model = model;
-        MedicamentosTable.setModel(model.getTableModel());
     }
 
     public void propertyChange(PropertyChangeEvent evt) {
@@ -77,8 +76,11 @@ public class PrescripcionView{
                 };
                 MedicamentosTable.setModel(new TableModel(cols, model.getList()));
                 break;
-            case Model.CURRENT:
+            case Model.CURRENTPACIENTE:
                 // TODO: NO SE AAAHHHH
+                break;
+            case Model.CURRENTRECETA:
+                // TODO: NO SE AHHHHH
                 break;
         }
     }
