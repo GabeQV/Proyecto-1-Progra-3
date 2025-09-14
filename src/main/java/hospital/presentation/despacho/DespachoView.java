@@ -18,6 +18,7 @@ public class DespachoView implements PropertyChangeListener {
     private JButton button4; // volver
     private JButton buscarButton;
     private JPanel despachoView;
+    private JLabel nombrePacienteLabel;
 
 
     Controller controller;
@@ -28,10 +29,14 @@ public class DespachoView implements PropertyChangeListener {
             String pacienteId = idField.getText();
             if (pacienteId == null || pacienteId.isEmpty()) {
                 JOptionPane.showMessageDialog(despachoView, "Ingrese ID de paciente para buscar", "Información", JOptionPane.INFORMATION_MESSAGE);
+                nombrePacienteLabel.setText("PACIENTE");
                 return;
             }
             controller.searchByPacienteId(pacienteId);
-            if (model.getList().isEmpty()) {
+            if (!model.getList().isEmpty() && model.getList().get(0).getPaciente() != null) {
+                nombrePacienteLabel.setText(model.getList().get(0).getPaciente().getNombre());
+            } else {
+                nombrePacienteLabel.setText("PACIENTE");
                 JOptionPane.showMessageDialog(despachoView, "No se encontraron recetas para ese ID", "Información", JOptionPane.INFORMATION_MESSAGE);
             }
         });
