@@ -40,4 +40,32 @@ public class Controller {
     public void clear() {
         model.setCurrent(new Receta());
     }
+
+    public void searchByPacienteId(String pacienteId) {
+        java.util.List<Receta> list = hospital.logic.Service.instance().findRecetasByPacienteId(pacienteId);
+        model.setList(list);
+        if (!list.isEmpty()) {
+            model.setCurrent(list.get(0));
+        } else {
+            model.setCurrent(new Receta());
+        }
+    }
+
+    public void searchByRecetaId(String recetaId) {
+        java.util.List<Receta> list = new java.util.ArrayList<>();
+        Receta r = new Receta();
+        r.setId(recetaId);
+        try {
+            Receta result = hospital.logic.Service.instance().readReceta(r);
+            if (result != null) {
+                list.add(result);
+                model.setCurrent(result);
+            } else {
+                model.setCurrent(new Receta());
+            }
+        } catch (Exception ex) {
+            model.setCurrent(new Receta());
+        }
+        model.setList(list);
+    }
 }
