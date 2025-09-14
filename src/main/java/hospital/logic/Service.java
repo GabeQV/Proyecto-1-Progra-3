@@ -77,7 +77,6 @@ public class Service {
         if (found == null) throw new Exception("Medico no existe");
         found.setNombre(e.getNombre());
         found.setEspecialidad(e.getEspecialidad());
-        found.setClave(e.getClave());
         stop();
     }
 
@@ -123,6 +122,16 @@ public class Service {
         }
     }
 
+    public void updateFarmaceuta(Farmaceuta e) throws Exception {
+        Farmaceuta found = data.getFarmaceutas().stream()
+                .filter(i -> i.getId().equals(e.getId()))
+                .findFirst()
+                .orElse(null);
+        if (found == null) throw new Exception("Farmaceuta no existe");
+        found.setNombre(e.getNombre());
+        stop();
+    }
+
     public List<Farmaceuta> findAllFarmaceutas() {
         return data.getFarmaceutas();
     }
@@ -163,6 +172,18 @@ public class Service {
         } else {
             throw new Exception("Paciente no existe");
         }
+    }
+
+    public void updatePaciente(Paciente e) throws Exception {
+        Paciente found = data.getPacientes().stream()
+                .filter(i -> i.getId().equals(e.getId()))
+                .findFirst()
+                .orElse(null);
+        if (found == null) throw new Exception("Paciente no existe");
+        found.setNombre(e.getNombre());
+        found.setTelefono(e.getTelefono());
+        found.setFechaNacimiento(e.getFechaNacimiento());
+        stop();
     }
 
     public List<Paciente> findAllPacientes() {
@@ -262,6 +283,17 @@ public class Service {
         } else {
             throw new Exception("Medicamento no existe");
         }
+    }
+
+    public void updateMedicamento(Medicamento e) throws Exception {
+        Medicamento found = data.getMedicamentos().stream()
+                .filter(i -> i.getId().equals(e.getId()))
+                .findFirst()
+                .orElse(null);
+        if (found == null) throw new Exception("Medicamento no existe");
+        found.setNombre(e.getNombre());
+        found.setPresentacion(e.getPresentacion());
+        stop();
     }
 
     public List<Medicamento> findAllMedicamentos() {
