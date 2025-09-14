@@ -3,6 +3,7 @@ package hospital.logic;
 import hospital.data.Data;
 import hospital.data.XmlPersister;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class Service {
@@ -213,6 +214,15 @@ public class Service {
         if (found == null) throw new Exception("Receta no existe");
         found.setEstado(r.getEstado());
         stop();
+    }
+
+    public List<Receta> findRecetas(LocalDate from, LocalDate to, String medicamentoNombre) {
+        return null; //data.getRecetas().stream()
+                //.filter(r -> r.getDuracion() != null
+                        //&& (from == null || !r.getDuracion().isBefore(from))
+                        //&& (to == null || !r.getDuracion().isAfter(to))
+                        //&& (medicamentoNombre == null || r.getMedicamento().getNombre().equals(medicamentoNombre)))
+                //.toList()
     }
 
     // =============== MEDICAMENTOS ===============

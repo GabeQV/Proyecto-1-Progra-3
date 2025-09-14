@@ -134,17 +134,24 @@
         <properties/>
         <border type="none" title="Listado"/>
         <children>
-          <scrollpane id="31317">
+          <scrollpane id="5879a">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
             <border type="none"/>
             <children>
-              <component id="3b523" class="javax.swing.JTable" binding="medicosTable">
+              <scrollpane id="31317">
                 <constraints/>
                 <properties/>
-              </component>
+                <border type="none"/>
+                <children>
+                  <component id="3b523" class="javax.swing.JTable" binding="medicosTable">
+                    <constraints/>
+                    <properties/>
+                  </component>
+                </children>
+              </scrollpane>
             </children>
           </scrollpane>
         </children>

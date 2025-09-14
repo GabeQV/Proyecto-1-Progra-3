@@ -6,6 +6,9 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlID;
 import jakarta.xml.bind.annotation.XmlIDREF;
 
+import java.time.Instant;
+import java.time.LocalDate;
+
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Receta {
     @XmlID
@@ -88,5 +91,4 @@ public class Receta {
 
     public Paciente getPaciente() { return paciente; }
     public void setPaciente(Paciente paciente) { this.paciente = paciente; }
-
 }
