@@ -11,8 +11,8 @@ public class Controller {
     public Controller(PrescripcionView view, Model model) {
         this.view = view;
         this.model = model;
-        view.setController(this);
-        view.setModel(model);
+     //   view.setController(this);
+      //  view.setModel(model);
         model.setList(Service.instance().findAllRecetas());
     }
 
