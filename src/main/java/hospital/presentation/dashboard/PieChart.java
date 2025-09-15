@@ -27,10 +27,6 @@ public class PieChart extends JPanel {
         add(chartPanel, BorderLayout.CENTER);
     }
 
-    /**
-     * Updates the pie chart with the given list of recetas.
-     * Groups by estado and counts.
-     */
     public void setData(List<Receta> recetas) {
         Map<String, Integer> estadoCounts = new HashMap<>();
         for (Receta r : recetas) {

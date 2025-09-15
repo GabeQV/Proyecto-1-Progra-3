@@ -14,7 +14,6 @@ public class Controller {
         this.view = view;
     }
 
-    // Nueva función: filtra por lista de medicamentos
     public List<Receta> findRecetasMultiple(LocalDate from, LocalDate to, List<String> medicamentosSeleccionados) {
         return Service.instance().findAllRecetas().stream()
                 .filter(r -> r.getFecha() != null

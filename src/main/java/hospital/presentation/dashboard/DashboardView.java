@@ -33,7 +33,6 @@ public class DashboardView extends JPanel implements PropertyChangeListener  {
     Controller controller;
     Model model;
 
-    // NUEVO: lista de medicamentos seleccionados para mostrar
     private List<String> medicamentosSeleccionados = new ArrayList<>();
 
     public JPanel getPrescripcionPanel() {return DashboardPanel;}
