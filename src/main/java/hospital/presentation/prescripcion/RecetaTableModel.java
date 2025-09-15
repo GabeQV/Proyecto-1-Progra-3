@@ -33,17 +33,17 @@ public class RecetaTableModel extends AbstractTableModel<Receta> implements java
     protected Object getPropetyAt(Receta e, int col) {
         switch (cols[col]) {
             case MEDICAMENTO:
-                return e.getMedicamento().getNombre();
+                return (e.getMedicamento() != null) ? e.getMedicamento().getNombre() : "";
             case PRESENTACION:
-                return e.getMedicamento().getPresentacion();
+                return (e.getMedicamento() != null) ? e.getMedicamento().getPresentacion() : "";
             case CANTIDAD:
-                return e.getCantidad();
+                return e.getCantidad() != null ? e.getCantidad() : "";
             case INDICACIONES:
-                return e.getIndicaciones();
+                return e.getIndicaciones() != null ? e.getIndicaciones() : "";
             case DURACION:
-                return e.getDuracion();
+                return e.getDuracion() != null ? e.getDuracion() : "";
             case ESTADO:
-                return e.getEstado();
+                return e.getEstado() != null ? e.getEstado() : "";
             default:
                 return "";
         }

@@ -9,9 +9,9 @@ import hospital.logic.Paciente.*;
 //import hospital.presentation.medicos.Controller;
 //import hospital.presentation.medicos.MedicosView;
 //import hospital.presentation.medicos.Model;
-import hospital.presentation.prescripcion.PrescripcionView;
-import hospital.presentation.prescripcion.Model;
 import hospital.presentation.prescripcion.Controller;
+import hospital.presentation.prescripcion.Model;
+import hospital.presentation.prescripcion.PrescripcionView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,9 +25,13 @@ public class Main {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");}
         catch (Exception ex) {};
 
+
         PrescripcionView view = new PrescripcionView();
         Model model = new Model();
         Controller controller = new Controller(view, model);
+//        LoginView view = new LoginView();
+//        hospital.presentation.login.Model model = new Model();
+//        hospital.presentation.login.Controller controller = new Controller(view, model);
 
 
 

@@ -1,7 +1,9 @@
 package hospital.presentation.prescripcion;
 
 import hospital.logic.Medicamento;
+import hospital.logic.Paciente;
 import hospital.logic.Service;
+import hospital.presentation.pacientes.TableModel;
 
 
 import javax.swing.*;
@@ -46,7 +48,6 @@ public class AgregarMedicamento extends JDialog implements PropertyChangeListene
             }
         });
 
-        // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -54,7 +55,6 @@ public class AgregarMedicamento extends JDialog implements PropertyChangeListene
             }
         });
 
-        // call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
@@ -67,18 +67,23 @@ public class AgregarMedicamento extends JDialog implements PropertyChangeListene
                 if (e.getClickCount() == 2) {
                     medicamento = ((MedicamentosTableModel)medicamentosTable.getModel()).getRowAt(medicamentosTable.getSelectedRow());
                     model.getCurrentReceta().setMedicamento(medicamento);
+                    model.setCurrentReceta(model.getCurrentReceta());
                 }
             }
         });
     }
 
     private void onOK() {
-        // add your code here
+        int row = medicamentosTable.getSelectedRow();
+        if (row != -1) {
+            Medicamento seleccionado = ((MedicamentosTableModel) medicamentosTable.getModel()).getRowAt(row);
+            model.getCurrentReceta().setMedicamento(seleccionado);
+            model.setCurrentReceta(model.getCurrentReceta());
+        }
         dispose();
     }
 
     private void onCancel() {
-        // add your code here if necessary
         dispose();
     }
 
@@ -89,7 +94,7 @@ public class AgregarMedicamento extends JDialog implements PropertyChangeListene
                 int[] cols = {MedicamentosTableModel.ID, MedicamentosTableModel.PRESENTACION, MedicamentosTableModel.NOMBRE};
                 medicamentosTable.setModel(new MedicamentosTableModel(cols, Service.instance().findAllMedicamentos()));
                 break;
-            case Model.CURRENTRECETA:
+            case Model.CURRENT_RECETA:
                 model.getCurrentReceta().setMedicamento(medicamento);
                 break;
 

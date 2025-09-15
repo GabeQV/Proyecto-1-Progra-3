@@ -44,7 +44,6 @@ public class BuscarPaciente extends JDialog implements PropertyChangeListener {
             }
         });
 
-        // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -52,30 +51,31 @@ public class BuscarPaciente extends JDialog implements PropertyChangeListener {
             }
         });
 
-        // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         pacientesTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                if (e.getClickCount() == 2) {
-                    model.setCurrentPaciente((Paciente) pacientesTable.getValueAt(pacientesTable.getSelectedRow(),pacientesTable.getSelectedColumn()));
+                if (e.getClickCount() == 2 && pacientesTable.getSelectedRow() != -1) {
+                    Paciente seleccionado = ((TableModel) pacientesTable.getModel()).getRowAt(pacientesTable.getSelectedRow());
+                    model.setCurrentPaciente(seleccionado);
+                    model.getCurrentReceta().setPaciente(seleccionado);
+                    model.setCurrentReceta(model.getCurrentReceta());
+                    dispose();
                 }
             }
         });
     }
 
     private void onOK() {
-        // add your code here
+        int row = pacientesTable.getSelectedRow();
+        if (row != -1) {
+            Paciente seleccionado = ((TableModel) pacientesTable.getModel()).getRowAt(row);
+            model.setCurrentPaciente(seleccionado);
+            model.setCurrentReceta(model.getCurrentReceta());
+        }
         dispose();
     }
 
     private void onCancel() {
-        // add your code here if necessary
         dispose();
     }
 
@@ -86,7 +86,7 @@ public class BuscarPaciente extends JDialog implements PropertyChangeListener {
                 int[] cols = {TableModel.ID, TableModel.NOMBRE, TableModel.FECHA_NACIMIENTO, TableModel.TELEFONO};
                 pacientesTable.setModel(new TableModel(cols, Service.instance().findAllPacientes()));
                 break;
-            case Model.CURRENTPACIENTE:
+            case Model.CURRENT_PACIENTE:
                model.getCurrentReceta().setPaciente(model.getCurrentPaciente());
 
         }

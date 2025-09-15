@@ -12,10 +12,9 @@ public class Model extends AbstractModel {
     Paciente currentPaciente;
     List<Receta> list;
 
-    public static final String CURRENTRECETA = "currentreceta";
-    public static final String CURRENTPACIENTE = "currentpaciente";
+    public static final String CURRENT_RECETA = "currentreceta";
+    public static final String CURRENT_PACIENTE = "currentpaciente";
     public static final String LIST = "list";
-    public static final String TABLE = "table";
 
     public Model() {
         currentReceta = new Receta();
@@ -27,7 +26,7 @@ public class Model extends AbstractModel {
 
     public void setCurrentReceta(Receta current) {
         this.currentReceta = current;
-        firePropertyChange(CURRENTRECETA);
+        firePropertyChange(CURRENT_RECETA);
     }
 
     public List<Receta> getList() { return list; }
@@ -55,6 +54,15 @@ public class Model extends AbstractModel {
 
     public void setCurrentPaciente(Paciente currentPaciente) {
         this.currentPaciente = currentPaciente;
-        firePropertyChange(CURRENTPACIENTE);
+        firePropertyChange(CURRENT_PACIENTE);
+    }
+
+    public List<Receta> getRecetaActualComoLista() {
+        if (currentReceta != null) {
+            java.util.List<Receta> lista = new java.util.ArrayList<>();
+            lista.add(currentReceta);
+            return lista;
+        }
+        return new java.util.ArrayList<>();
     }
 }

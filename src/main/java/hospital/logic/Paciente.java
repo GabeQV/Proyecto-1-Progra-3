@@ -15,6 +15,7 @@ public class Paciente{
     @XmlID
     protected String id;
     protected String nombre;
+
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     protected LocalDate fechaNacimiento;
     private String telefono;
