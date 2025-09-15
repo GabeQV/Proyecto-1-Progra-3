@@ -79,8 +79,15 @@ public class CatologoView implements PropertyChangeListener {
             med.setId(idField.getText());
             med.setNombre(nombreField.getText());
             med.setPresentacion(presentacionField.getText());
-            controller.create(med);
-            JOptionPane.showMessageDialog(catalogoPanel, "Medicamento guardado correctamente.");
+
+            boolean existe = model.getList().stream().anyMatch(m -> m.getId().equals(med.getId()));
+            if (existe) {
+                controller.update(med);
+                JOptionPane.showMessageDialog(catalogoPanel, "Medicamento actualizado correctamente.");
+            } else {
+                controller.create(med);
+                JOptionPane.showMessageDialog(catalogoPanel, "Medicamento guardado correctamente.");
+            }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(catalogoPanel, "Error al guardar: " + ex.getMessage());
         }
