@@ -8,7 +8,6 @@ import jakarta.xml.bind.annotation.XmlID;
 import jakarta.xml.bind.annotation.XmlIDREF;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import java.time.Instant;
 import java.time.LocalDate;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -37,17 +36,21 @@ public class Receta {
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     LocalDate fecha;
 
-
     public Receta() {
     }
 
-    public Receta(String id, String indicaciones, String cantidad, String duracion,String estado, Medicamento medicamento) {
+    public Receta(String id, String indicaciones, String cantidad, String duracion, String estado, Medicamento medicamento, LocalDate fecha) {
         this.id = id;
         this.indicaciones = indicaciones;
         this.cantidad = cantidad;
         this.duracion = duracion;
         this.medicamento = medicamento;
         this.estado = estado;
+        this.fecha = fecha;
+    }
+
+    public Receta(String id, String indicaciones, String cantidad, String duracion,String estado, Medicamento medicamento) {
+        this(id, indicaciones, cantidad, duracion, estado, medicamento, null);
     }
 
     public String getCantidad() {
@@ -100,4 +103,5 @@ public class Receta {
 
     public LocalDate getFecha() { return fecha; }
     public void setFecha(LocalDate fecha) { this.fecha = fecha; }
+
 }

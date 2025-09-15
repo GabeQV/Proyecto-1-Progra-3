@@ -14,17 +14,27 @@ public class Controller {
         this.view = view;
     }
 
+    // Nueva función: filtra por lista de medicamentos
+    public List<Receta> findRecetasMultiple(LocalDate from, LocalDate to, List<String> medicamentosSeleccionados) {
+        return Service.instance().findAllRecetas().stream()
+                .filter(r -> r.getFecha() != null
+                        && (from == null || !r.getFecha().isBefore(from))
+                        && (to == null || !r.getFecha().isAfter(to))
+                        && (medicamentosSeleccionados == null || medicamentosSeleccionados.isEmpty()
+                        || medicamentosSeleccionados.contains(r.getMedicamento().getNombre())))
+                .toList();
+    }
+
+
     public List<Receta> findRecetas(LocalDate from, LocalDate to, String medicamentoNombre) {
         return Service.instance().findAllRecetas().stream()
-        .filter(r -> r.getFecha() != null
-        && (from == null || !r.getFecha().isBefore(from))
-        && (to == null || !r.getFecha().isAfter(to))
-        && (medicamentoNombre == null || r.getMedicamento().getNombre().equals(medicamentoNombre)))
-        .toList();
-
+                .filter(r -> r.getFecha() != null
+                        && (from == null || !r.getFecha().isBefore(from))
+                        && (to == null || !r.getFecha().isAfter(to))
+                        && (medicamentoNombre == null || r.getMedicamento().getNombre().equals(medicamentoNombre)))
+                .toList();
     }
     public void recetasOrdenadas(LocalDate from, LocalDate to, String medicamentoNombre) {
         model.setList(findRecetas(from, to, medicamentoNombre));
     }
-
 }

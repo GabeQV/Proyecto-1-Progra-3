@@ -3,7 +3,6 @@ package hospital.presentation.dashboard;
 import hospital.logic.Receta;
 import hospital.presentation.abstracts.AbstractTableModel;
 
-import java.time.YearMonth;
 import java.util.List;
 
 public class TableModel extends AbstractTableModel<Receta> implements javax.swing.table.TableModel{
@@ -20,7 +19,7 @@ public class TableModel extends AbstractTableModel<Receta> implements javax.swin
     protected void initColNames() {
         colNames = new String[3];
         colNames[MEDICAMENTO] = "Medicamento";
-        colNames[MES] = "Mes";
+        colNames[MES] = "Fecha";
         colNames[CANTIDAD] = "Cantidad";
     }
 
@@ -28,10 +27,9 @@ public class TableModel extends AbstractTableModel<Receta> implements javax.swin
     protected Object getPropetyAt(Receta e, int col) {
         switch (cols[col]) {
             case MEDICAMENTO:
-                return e.getMedicamento();
+                return e.getMedicamento().getNombre();
             case MES:
-                YearMonth ym = YearMonth.from(e.getFecha());
-                return ym.toString();
+                return e.getFecha().toString();
             case CANTIDAD:
                 return e.getCantidad();
             default:
