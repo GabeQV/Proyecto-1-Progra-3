@@ -13,11 +13,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PieChart extends JFrame {
-    public PieChart() {
-        DefaultPieDataset pieDataset = new DefaultPieDataset();
+public class PieChart extends JPanel {
+    private DefaultPieDataset pieDataset;
+    private ChartPanel chartPanel;
 
-        List<Receta> recetas = Service.instance().findAllRecetas();
+    public PieChart() {
+        pieDataset = new DefaultPieDataset();
+        JFreeChart chart = ChartFactory.createPieChart(
+                "Estados de las Recetas", pieDataset, true, true, false
+        );
+        chartPanel = new ChartPanel(chart);
+        setLayout(new BorderLayout());
+        add(chartPanel, BorderLayout.CENTER);
+    }
+
+    public void setData(List<Receta> recetas) {
         Map<String, Integer> estadoCounts = new HashMap<>();
         for (Receta r : recetas) {
             String estado = r.getEstado();
@@ -25,21 +35,9 @@ public class PieChart extends JFrame {
             estadoCounts.put(estado, estadoCounts.getOrDefault(estado, 0) + 1);
         }
 
+        pieDataset.clear();
         for (Map.Entry<String, Integer> entry : estadoCounts.entrySet()) {
             pieDataset.setValue(entry.getKey(), entry.getValue());
         }
-
-        JFreeChart chart = ChartFactory.createPieChart(
-                "Estados de las Recetas", pieDataset, true, true, false
-        );
-
-        ChartPanel chartPanel = new ChartPanel(chart);
-        setLayout(new BorderLayout());
-        add(chartPanel, BorderLayout.CENTER);
-
-        setTitle("Estados de las Recetas");
-        setSize(500, 350);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 }
