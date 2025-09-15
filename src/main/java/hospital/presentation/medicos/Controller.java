@@ -16,7 +16,15 @@ public class Controller {
     }
 
     public void create(Medico e) throws  Exception{
-        Service.instance().createMedico(e);
+        try {
+            Service.instance().createMedico(e);
+        } catch (Exception ex) {
+            if ("Medico ya existe".equals(ex.getMessage())) {
+                Service.instance().updateMedico(e);
+            } else {
+                throw ex;
+            }
+        }
         model.setCurrent(new Medico());
         model.setList(Service.instance().findAllMedicos());
     }
@@ -34,7 +42,6 @@ public class Controller {
                 throw ex;
             }
         }
-
     }
 
     public void clear() {

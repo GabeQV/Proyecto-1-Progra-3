@@ -11,9 +11,11 @@ import java.time.LocalDate;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Receta {
+
     @XmlID
     @XmlElement
     private String id;
+
     @XmlElement
     private String indicaciones;
     @XmlElement
@@ -22,12 +24,15 @@ public class Receta {
     private String duracion;
     @XmlElement
     private String estado;
+
     @XmlIDREF
     @XmlElement
     private Usuario usuario;
+
     @XmlIDREF
     @XmlElement
     private Paciente paciente;
+
     @XmlIDREF
     @XmlElement
     private Medicamento medicamento;

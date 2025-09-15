@@ -17,7 +17,15 @@ public class Controller {
     }
 
     public void create(Paciente e) throws  Exception{
-        Service.instance().createPaciente(e);
+        try {
+            Service.instance().createPaciente(e);
+        } catch (Exception ex) {
+            if ("Paciente ya existe".equals(ex.getMessage())) {
+                Service.instance().updatePaciente(e);
+            } else {
+                throw ex;
+            }
+        }
         model.setCurrent(new Paciente());
         model.setList(Service.instance().findAllPacientes());
     }

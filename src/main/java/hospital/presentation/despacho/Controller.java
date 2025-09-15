@@ -8,7 +8,7 @@ import java.util.List;
 public class Controller {
     DespachoView view;
     Model model;
-
+    private String pacienteIdActual = null;
     public Controller(DespachoView view, Model model) {
         this.view = view;
         this.model = model;
@@ -41,6 +41,7 @@ public class Controller {
     }
 
     public void searchByPacienteId(String pacienteId) {
+        pacienteIdActual = pacienteId; // <--- guarda el último paciente buscado
         List<Receta> list = Service.instance().findRecetasByPacienteId(pacienteId);
         model.setList(list);
         if (list.isEmpty()) {
@@ -52,7 +53,7 @@ public class Controller {
         Receta r = model.getCurrent();
         r.setEstado("En proceso");
         Service.instance().updateReceta(r);
-        model.setList(Service.instance().findAllRecetas());
+        actualizarListaPorPaciente();
         model.setCurrent(r);
     }
 
@@ -60,7 +61,7 @@ public class Controller {
         Receta r = model.getCurrent();
         r.setEstado("Lista");
         Service.instance().updateReceta(r);
-        model.setList(Service.instance().findAllRecetas());
+        actualizarListaPorPaciente();
         model.setCurrent(r);
     }
 
@@ -68,13 +69,14 @@ public class Controller {
         Receta r = model.getCurrent();
         r.setEstado("Entregada");
         Service.instance().updateReceta(r);
-        model.setList(Service.instance().findAllRecetas());
+        actualizarListaPorPaciente();
         model.setCurrent(r);
     }
 
     public void revertir() throws Exception {
         Receta r = model.getCurrent();
         String estado = r.getEstado();
+
         if ("En proceso".equalsIgnoreCase(estado)) {
             r.setEstado("Confeccionado");
         } else if ("Lista".equalsIgnoreCase(estado)) {
@@ -85,7 +87,15 @@ public class Controller {
             throw new Exception("No hay estado anterior para revertir");
         }
         Service.instance().updateReceta(r);
-        model.setList(Service.instance().findAllRecetas());
+        actualizarListaPorPaciente();
         model.setCurrent(r);
+    }
+
+    private void actualizarListaPorPaciente() {
+        if (pacienteIdActual != null && !pacienteIdActual.isEmpty()) {
+            model.setList(Service.instance().findRecetasByPacienteId(pacienteIdActual));
+        } else {
+            model.setList(Service.instance().findAllRecetas());
+        }
     }
 }
