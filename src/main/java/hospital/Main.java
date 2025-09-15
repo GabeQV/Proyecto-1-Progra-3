@@ -1,11 +1,12 @@
 package hospital;
 
 import hospital.logic.Service;
+import hospital.presentation.catalogo.CatologoView;
 import hospital.presentation.despacho.DespachoView;
-import hospital.presentation.historico_recetas.Controller;
 import hospital.presentation.login.LoginView;
-import hospital.presentation.historico_recetas.Model;
 import hospital.presentation.historico_recetas.HistoricoRecetasView;
+import hospital.presentation.catalogo.Controller;
+import hospital.presentation.catalogo.Model;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,17 +20,17 @@ public class Main {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");}
         catch (Exception ex) {};
 
-        HistoricoRecetasView view = new HistoricoRecetasView();
-        hospital.presentation.historico_recetas.Model model = new Model();
-        hospital.presentation.historico_recetas.Controller controller = new Controller(view, model);
+        CatologoView view = new CatologoView();
+        hospital.presentation.catalogo.Model model = new Model();
+        hospital.presentation.catalogo.Controller controller = new Controller(view, model);
 
 
 
         JFrame window = new JFrame();
-        window.setSize(500,400);
+        window.setSize(700,500);
         window.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         window.setTitle("Hospital");
-        window.setContentPane(view.getHitoricoRecetasPanel());
+        window.setContentPane(view.getCatalogoPanel());
 
         window.setLocationRelativeTo(null);
 

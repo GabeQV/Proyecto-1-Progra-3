@@ -1,6 +1,5 @@
 package hospital.presentation.despacho;
 
-import hospital.logic.Medico;
 import hospital.logic.Receta;
 import hospital.presentation.abstracts.AbstractModel;
 
