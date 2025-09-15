@@ -108,9 +108,12 @@ public class PrescripcionView implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
             case Model.CURRENT_RECETA:
-            case Model.CURRENT_PACIENTE:
                 int[] cols = {RecetaTableModel.MEDICAMENTO, RecetaTableModel.PRESENTACION, RecetaTableModel.CANTIDAD, RecetaTableModel.INDICACIONES, RecetaTableModel.DURACION};
                 RecetaTable.setModel(new RecetaTableModel(cols, model.getRecetaActualComoLista()));
+                break;
+            case Model.CURRENT_PACIENTE:
+                int[] cols2 = {RecetaTableModel.MEDICAMENTO, RecetaTableModel.PRESENTACION, RecetaTableModel.CANTIDAD, RecetaTableModel.INDICACIONES, RecetaTableModel.DURACION};
+                RecetaTable.setModel(new RecetaTableModel(cols2, model.getRecetaActualComoLista()));
                 if (model.getCurrentPaciente() != null)
                     mostrarPacienteAcaLabel.setText(model.getCurrentPaciente().getNombre());
                 break;

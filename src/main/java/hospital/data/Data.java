@@ -41,19 +41,19 @@ public class Data {
         medicamentos.add(Acetaminofen);
         Medicamento Ibuprofeno = new Medicamento("222","Ibuprofeno","100 mg");
         medicamentos.add(Ibuprofeno);
-        Paciente p = new Paciente("P123","Carlos Gutierrez", LocalDate.of(1998,9,16),"89677869");
-        pacientes.add(p);
-        Receta r = new Receta("123","Tarde y noche","5","8 dias","Confeccionado", Acetaminofen);
-        r.setPaciente(p);
-        recetas.add(r);
-        Paciente p1 = new Paciente("P987","Joel Brenes", LocalDate.of(1998,9,16),"12312312312");
-        pacientes.add(p1);
-        Receta r1 = new Receta("987","Noche y noche","55","3 dias","Confeccionado", Acetaminofen);
-        r1.setPaciente(p1);
-        recetas.add(r1);
-        Receta r2 = new Receta("456","DIA y DIAAAAAAAAAAAAAA","999","666 dias","Confeccionado", Acetaminofen);
-        r2.setPaciente(p1);
-        recetas.add(r2);
+//        Paciente p = new Paciente("P123","Carlos Gutierrez", LocalDate.of(1998,9,16),"89677869");
+//        pacientes.add(p);
+//        Receta r = new Receta("123","Tarde y noche","5","8 dias","Confeccionado", Acetaminofen);
+//        r.setPaciente(p);
+//        recetas.add(r);
+//        Paciente p1 = new Paciente("P987","Joel Brenes", LocalDate.of(1998,9,16),"12312312312");
+//        pacientes.add(p1);
+//        Receta r1 = new Receta("987","Noche y noche","55","3 dias","Confeccionado", Acetaminofen);
+//        r1.setPaciente(p1);
+//        recetas.add(r1);
+//        Receta r2 = new Receta("456","DIA y DIAAAAAAAAAAAAAA","999","666 dias","Confeccionado", Acetaminofen);
+//        r2.setPaciente(p1);
+//        recetas.add(r2);
 
 
     }

@@ -75,8 +75,6 @@ public class AgregarMedicamento extends JDialog implements PropertyChangeListene
         });
     }
 
-
-
     private void onOK() {
         int row = medicamentosTable.getSelectedRow();
         if (row != -1) {

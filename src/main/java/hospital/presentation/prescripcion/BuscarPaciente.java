@@ -27,6 +27,7 @@ public class BuscarPaciente extends JDialog implements PropertyChangeListener {
         parent.setVisible(true);
         parent.setLocationRelativeTo(null);
 
+
         this.model = model;
 
         int[] cols = {TableModel.ID, TableModel.NOMBRE, TableModel.FECHA_NACIMIENTO, TableModel.TELEFONO};

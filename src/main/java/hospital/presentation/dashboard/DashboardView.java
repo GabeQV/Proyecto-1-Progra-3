@@ -35,7 +35,7 @@ public class DashboardView extends JPanel implements PropertyChangeListener  {
 
     private List<String> medicamentosSeleccionados = new ArrayList<>();
 
-    public JPanel getPrescripcionPanel() {return DashboardPanel;}
+    public JPanel getDashboardPanel() {return DashboardPanel;}
 
     public DashboardView() {
         lineChart = new LineChart();
