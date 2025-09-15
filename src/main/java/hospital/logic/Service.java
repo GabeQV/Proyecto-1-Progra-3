@@ -306,6 +306,20 @@ public class Service {
         stop();
     }
 
+    public List<Medicamento> findMedicamentosByNombre(String nombre) {
+        String filtro = nombre.trim().toLowerCase();
+        return data.getMedicamentos().stream()
+                .filter(m -> m.getNombre() != null && m.getNombre().toLowerCase().contains(filtro))
+                .toList();
+    }
+
+    public List<Medicamento> findMedicamentosByCodigo(String codigo) {
+        String filtro = codigo.trim().toLowerCase();
+        return data.getMedicamentos().stream()
+                .filter(m -> m.getId() != null && m.getId().toLowerCase().contains(filtro))
+                .toList();
+    }
+
     public List<Medicamento> findAllMedicamentos() {
         return data.getMedicamentos();
     }
