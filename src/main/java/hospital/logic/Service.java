@@ -154,6 +154,19 @@ public class Service {
         }
     }
 
+    public void updatePaciente(Paciente e) throws Exception {
+        Paciente found = data.getPacientes().stream()
+                .filter(i -> i.getId().equals(e.getId()))
+                .findFirst()
+                .orElse(null);
+        if (found == null) throw new Exception("Paciente no existe");
+        found.setNombre(e.getNombre());
+        found.setTelefono(e.getTelefono());
+        found.setFechaNacimiento(e.getFechaNacimiento());
+        stop();
+    }
+
+
     public List<Paciente> findAllPacientes() {
         return data.getPacientes();
     }

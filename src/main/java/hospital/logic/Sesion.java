@@ -67,14 +67,14 @@ public class Sesion {
                 //MVC de dashboard
                 hospital.presentation.dashboard.DashboardView dashboardView = new hospital.presentation.dashboard.DashboardView();
                 hospital.presentation.dashboard.Model dashboardModel = new hospital.presentation.dashboard.Model();
-                // hospital.presentation.dashboard.Controller dashboardController = new hospital.presentation.dashboard.Controller(dashboardView, dashboardModel);
+                hospital.presentation.dashboard.Controller dashboardController = new hospital.presentation.dashboard.Controller(dashboardView, dashboardModel);
                 tabbedPane.addTab("Dashboard", dashboardView.getDashboardPanel());
 
                 //MVC de historico
                 hospital.presentation.historico_recetas.HistoricoRecetasView historicoRecetasView = new hospital.presentation.historico_recetas.HistoricoRecetasView();
                 hospital.presentation.historico_recetas.Model historicoRecetaModel = new hospital.presentation.historico_recetas.Model();
                 hospital.presentation.historico_recetas.Controller historicoRecetasController = new hospital.presentation.historico_recetas.Controller(historicoRecetasView, historicoRecetaModel);
-                tabbedPane.addTab();
+                tabbedPane.addTab("Historico", historicoRecetasView.getHitoricoRecetasPanel());
 
             case "MEDICO":
 
@@ -82,6 +82,7 @@ public class Sesion {
                 hospital.presentation.prescripcion.PrescripcionView prescripcionView = new hospital.presentation.prescripcion.PrescripcionView();
                 hospital.presentation.prescripcion.Model prescripcionModel = new hospital.presentation.prescripcion.Model();
                 hospital.presentation.prescripcion.Controller prescripcionController =  new hospital.presentation.prescripcion.Controller(prescripcionView, prescripcionModel);
+
 
 
         }
