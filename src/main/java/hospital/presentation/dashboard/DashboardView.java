@@ -52,7 +52,6 @@ public class DashboardView extends JPanel implements PropertyChangeListener  {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            medicamentosTable.
 
             }
         });
