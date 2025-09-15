@@ -1,10 +1,12 @@
 package hospital.logic;
 
+import hospital.data.LocalDateAdapter;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlID;
 import jakarta.xml.bind.annotation.XmlIDREF;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -31,6 +33,10 @@ public class Receta {
     @XmlIDREF
     @XmlElement
     private Medicamento medicamento;
+    @XmlElement
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    LocalDate fecha;
+
 
     public Receta() {
     }
@@ -91,4 +97,7 @@ public class Receta {
 
     public Paciente getPaciente() { return paciente; }
     public void setPaciente(Paciente paciente) { this.paciente = paciente; }
+
+    public LocalDate getFecha() { return fecha; }
+    public void setFecha(LocalDate fecha) { this.fecha = fecha; }
 }

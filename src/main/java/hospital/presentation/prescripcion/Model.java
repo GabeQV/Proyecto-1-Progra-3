@@ -15,7 +15,6 @@ public class Model extends AbstractModel {
     public static final String CURRENTRECETA = "currentreceta";
     public static final String CURRENTPACIENTE = "currentpaciente";
     public static final String LIST = "list";
-    public static final String TABLE = "table";
 
     public Model() {
         currentReceta = new Receta();

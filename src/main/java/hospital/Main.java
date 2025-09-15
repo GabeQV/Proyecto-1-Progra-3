@@ -10,8 +10,10 @@ import hospital.logic.Paciente.*;
 //import hospital.presentation.medicos.MedicosView;
 //import hospital.presentation.medicos.Model;
 import hospital.presentation.prescripcion.PrescripcionView;
-import hospital.presentation.prescripcion.Model;
-import hospital.presentation.prescripcion.Controller;
+
+import hospital.presentation.dashboard.DashboardView;
+import hospital.presentation.dashboard.Model;
+import hospital.presentation.dashboard.Controller;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,11 +27,11 @@ public class Main {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");}
         catch (Exception ex) {};
 
-        PrescripcionView view = new PrescripcionView();
         Model model = new Model();
-        Controller controller = new Controller(view, model);
-
-
+        Controller controller = new Controller(model, null);
+        DashboardView view = new DashboardView();
+        view.setController(controller);
+        view.setModel(model);
 
         JFrame window = new JFrame();
         window.setSize(700,500);

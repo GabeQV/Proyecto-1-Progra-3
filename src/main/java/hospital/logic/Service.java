@@ -216,15 +216,6 @@ public class Service {
         stop();
     }
 
-    public List<Receta> findRecetas(LocalDate from, LocalDate to, String medicamentoNombre) {
-        return null; //data.getRecetas().stream()
-                //.filter(r -> r.getDuracion() != null
-                        //&& (from == null || !r.getDuracion().isBefore(from))
-                        //&& (to == null || !r.getDuracion().isAfter(to))
-                        //&& (medicamentoNombre == null || r.getMedicamento().getNombre().equals(medicamentoNombre)))
-                //.toList()
-    }
-
     // =============== MEDICAMENTOS ===============
     public void createMedicamento(Medicamento e) throws Exception {
         Medicamento result = data.getMedicamentos().stream()
