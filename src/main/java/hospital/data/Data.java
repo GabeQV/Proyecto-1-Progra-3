@@ -39,21 +39,7 @@ public class Data {
 
         // Ejemplo original
         Medicamento Acetaminofen = new Medicamento("111","Acetaminofen","150 mg");
-        medicamentos.add(Acetaminofen);
-        Paciente p = new Paciente("P123","Carlos Gutierrez", LocalDate.of(1998,9,16),"89677869");
-        pacientes.add(p);
-        Receta r = new Receta("123","Tarde y noche","5","8 dias","Confeccionado", Acetaminofen, LocalDate.of(2025, 1, 2));
-        r.setPaciente(p);
-        recetas.add(r);
 
-        // Ejemplo adicional 1
-        Medicamento Ibuprofeno = new Medicamento("112","Ibuprofeno","200 mg");
-        medicamentos.add(Ibuprofeno);
-        Paciente p2 = new Paciente("P124","Maria Lopez", LocalDate.of(2000,5,24),"87542314");
-        pacientes.add(p2);
-        Receta r2 = new Receta("124","Cada 8 horas","10","5 dias","En proceso", Ibuprofeno, LocalDate.of(2025, 2, 15));
-        r2.setPaciente(p2);
-        recetas.add(r2);
 
         // Ejemplo adicional 2
         Receta r3 = new Receta("125","Noche","7","7 dias","Entregado", Acetaminofen, LocalDate.of(2025, 3, 20));

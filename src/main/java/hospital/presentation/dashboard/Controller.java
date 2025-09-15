@@ -9,7 +9,7 @@ import java.util.List;
 public class Controller {
     Model model;
     DashboardView view;
-    public Controller( DashboardView view,Model model) {
+    public Controller(DashboardView view, Model model) {
         this.model = model;
         this.view = view;
     }
