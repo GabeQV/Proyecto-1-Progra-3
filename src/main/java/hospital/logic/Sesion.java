@@ -1,5 +1,6 @@
 package hospital.logic;
 
+import hospital.presentation.dashboard.Controller;
 import hospital.presentation.dashboard.DashboardView;
 
 import javax.swing.*;
@@ -56,6 +57,33 @@ public class Sesion {
                 hospital.presentation.pacientes.Model pacientesModel = new hospital.presentation.pacientes.Model();
                 hospital.presentation.pacientes.Controller pacientesController = new hospital.presentation.pacientes.Controller(pacientesView, pacientesModel);
                 tabbedPane.addTab("Pacientes", pacientesView.getPacientesPanel());
+
+                //MVC de catalogo
+                hospital.presentation.catalogo.CatologoView catologoView = new hospital.presentation.catalogo.CatologoView();
+                hospital.presentation.catalogo.Model catologoModel = new hospital.presentation.catalogo.Model();
+                hospital.presentation.catalogo.Controller catalogoController = new hospital.presentation.catalogo.Controller(catologoView, catologoModel);
+                tabbedPane.addTab("Medicamentos", catologoView.getCatalogoPanel());
+
+                //MVC de dashboard
+                hospital.presentation.dashboard.DashboardView dashboardView = new hospital.presentation.dashboard.DashboardView();
+                hospital.presentation.dashboard.Model dashboardModel = new hospital.presentation.dashboard.Model();
+                hospital.presentation.dashboard.Controller dashboardController = new hospital.presentation.dashboard.Controller(dashboardView, dashboardModel);
+                tabbedPane.addTab("Dashboard", dashboardView.getDashboardPanel());
+
+                //MVC de historico
+                hospital.presentation.historico_recetas.HistoricoRecetasView historicoRecetasView = new hospital.presentation.historico_recetas.HistoricoRecetasView();
+                hospital.presentation.historico_recetas.Model historicoRecetaModel = new hospital.presentation.historico_recetas.Model();
+                hospital.presentation.historico_recetas.Controller historicoRecetasController = new hospital.presentation.historico_recetas.Controller(historicoRecetasView, historicoRecetaModel);
+                tabbedPane.addTab("Historico", historicoRecetasView.getHitoricoRecetasPanel());
+
+            case "MEDICO":
+
+                //MVC de prescripcion
+                hospital.presentation.prescripcion.PrescripcionView prescripcionView = new hospital.presentation.prescripcion.PrescripcionView();
+                hospital.presentation.prescripcion.Model prescripcionModel = new hospital.presentation.prescripcion.Model();
+                hospital.presentation.prescripcion.Controller prescripcionController =  new hospital.presentation.prescripcion.Controller(prescripcionView, prescripcionModel);
+
+
 
         }
 

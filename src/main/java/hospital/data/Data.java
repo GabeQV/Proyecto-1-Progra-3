@@ -37,25 +37,24 @@ public class Data {
         medicamentos = new ArrayList<>();
         recetas = new ArrayList<>();
 
+        // Ejemplo original
         Medicamento Acetaminofen = new Medicamento("111","Acetaminofen","150 mg");
-        medicamentos.add(Acetaminofen);
-        Medicamento Ibuprofeno = new Medicamento("222","Ibuprofeno","100 mg");
-        medicamentos.add(Ibuprofeno);
-//        Paciente p = new Paciente("P123","Carlos Gutierrez", LocalDate.of(1998,9,16),"89677869");
-//        pacientes.add(p);
-//        Receta r = new Receta("123","Tarde y noche","5","8 dias","Confeccionado", Acetaminofen);
-//        r.setPaciente(p);
-//        recetas.add(r);
-//        Paciente p1 = new Paciente("P987","Joel Brenes", LocalDate.of(1998,9,16),"12312312312");
-//        pacientes.add(p1);
-//        Receta r1 = new Receta("987","Noche y noche","55","3 dias","Confeccionado", Acetaminofen);
-//        r1.setPaciente(p1);
-//        recetas.add(r1);
-//        Receta r2 = new Receta("456","DIA y DIAAAAAAAAAAAAAA","999","666 dias","Confeccionado", Acetaminofen);
-//        r2.setPaciente(p1);
-//        recetas.add(r2);
 
 
+        // Ejemplo adicional 2
+        Receta r3 = new Receta("125","Noche","7","7 dias","Entregado", Acetaminofen, LocalDate.of(2025, 3, 20));
+        r3.setPaciente(p2);
+        recetas.add(r3);
+
+        // Ejemplo adicional 3
+        Receta r4 = new Receta("126","Mañana","3","10 dias","Lista", Ibuprofeno, LocalDate.of(2025, 4, 5));
+        r4.setPaciente(p);
+        recetas.add(r4);
+
+        // Ejemplo adicional 4
+        Receta r5 = new Receta("127","Mañana y noche","2","3 dias","En proceso", Acetaminofen, LocalDate.of(2025, 5, 12));
+        r5.setPaciente(p);
+        recetas.add(r5);
     }
 
     public List<Medico> getMedicos() {return medicos;}
