@@ -31,7 +31,7 @@ public class Controller {
         for (Receta r : model.getList()) {
             Service.instance().createReceta(r);
         }
-        model.setList(new java.util.ArrayList<>()); // clear list after save
+        model.setList(new java.util.ArrayList<>());
     }
 
     public void clear() {
@@ -48,7 +48,37 @@ public class Controller {
         return false;
     }
 
+    public void descartarMedicamento()  {
+        Receta receta = model.getCurrentReceta();
+        if(receta != null && receta.getMedicamento() != null) {
+            model.getCurrentReceta().setMedicamento(null);
+            model.setCurrentReceta(model.getCurrentReceta());
+            model.getCurrentReceta().setCantidad("");
+            model.getCurrentReceta().setDuracion("");
+            model.getCurrentReceta().setIndicaciones("");
+        }
+    }
+
+    public void guardarRecetaActual(Receta r) throws Exception {
+
+        if (r.getId() == null || r.getId().isEmpty()) {
+            r.setId(generarIdReceta());
+        }
+        Service.instance().createReceta(r);
+        model.setCurrentReceta(new Receta());
+    }
+
     public Receta mostrarDetalles(int index) {
         return model.getList().get(index);
+    }
+
+    private String generarIdReceta() {
+        java.util.Random rand = new java.util.Random();
+        String nuevoId;
+        do {
+            int idNum = rand.nextInt(1000); // 0 - 999
+            nuevoId = String.format("%03d", idNum); // 3 dígitos
+        } while (Service.instance().findRecetaById(nuevoId));
+        return nuevoId;
     }
 }

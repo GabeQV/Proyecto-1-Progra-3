@@ -85,7 +85,7 @@
             </constraints>
             <properties>
               <foreground color="-16775963"/>
-              <text value="Nombre Paciente"/>
+              <text value="Nombre"/>
             </properties>
           </component>
           <component id="c06e1" class="javax.swing.JLabel">

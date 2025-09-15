@@ -194,8 +194,9 @@ public class Service {
 
     // =============== RECETAS ===============
     public void createReceta(Receta e) throws Exception {
+
         Receta result = data.getRecetas().stream()
-                .filter(i -> i.getId().equals(e.getId()))
+                .filter(i -> i.getId() != null && i.getId().equals(e.getId()))
                 .findFirst()
                 .orElse(null);
         if (result == null) {
@@ -249,13 +250,9 @@ public class Service {
         stop();
     }
 
-    public List<Receta> findRecetas(LocalDate from, LocalDate to, String medicamentoNombre) {
-        return null; //data.getRecetas().stream()
-                //.filter(r -> r.getDuracion() != null
-                        //&& (from == null || !r.getDuracion().isBefore(from))
-                        //&& (to == null || !r.getDuracion().isAfter(to))
-                        //&& (medicamentoNombre == null || r.getMedicamento().getNombre().equals(medicamentoNombre)))
-                //.toList()
+    public boolean findRecetaById(String id) {
+        return data.getRecetas().stream()
+                .anyMatch(r -> r.getId() != null && r.getId().equals(id));
     }
 
     // =============== MEDICAMENTOS ===============

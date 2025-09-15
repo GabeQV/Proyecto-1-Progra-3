@@ -1,6 +1,9 @@
 package hospital.presentation.prescripcion;
 
 import com.github.lgooddatepicker.components.DatePicker;
+import hospital.Main;
+import hospital.logic.Paciente;
+import hospital.logic.Receta;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -51,9 +54,52 @@ public class PrescripcionView implements PropertyChangeListener {
         detallesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ModificarDetalle dialog = new ModificarDetalle(
-                        (JFrame) SwingUtilities.getWindowAncestor(PrescripcionPanel), model);
-                dialog.setVisible(true);
+                if (model.getCurrentReceta().getMedicamento() == null) {
+                    JOptionPane.showMessageDialog(PrescripcionPanel, "No hay medicamento asignado a la receta.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                else {
+                    ModificarDetalle dialog = new ModificarDetalle(
+                            (JFrame) SwingUtilities.getWindowAncestor(PrescripcionPanel), model);
+                    dialog.setVisible(true);
+                }
+            }
+        });
+        descartarMedicamentoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (model.getCurrentReceta().getMedicamento() == null) {
+                    JOptionPane.showMessageDialog(PrescripcionPanel, "No hay medicamento asignado a la receta.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                controller.descartarMedicamento();
+            }
+        });
+        limpiarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.clear();
+                mostrarPacienteAcaLabel.setText("Nombre");
+                FechaDeRetiro.clear();
+            }
+        });
+        guardarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (validate()) {
+                    Receta n = model.getCurrentReceta();
+                    try {
+                        controller.guardarRecetaActual(n);
+                        JOptionPane.showMessageDialog(PrescripcionPanel, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
+                        FechaDeRetiro.clear();
+                        mostrarPacienteAcaLabel.setText("Nombre");
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(PrescripcionPanel, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(PrescripcionPanel, "Complete todos los campos requeridos.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
             }
         });
     }
@@ -70,6 +116,31 @@ public class PrescripcionView implements PropertyChangeListener {
                 break;
         }
         RecetaTable.revalidate();
+    }
+
+    private boolean validate() {
+        boolean valid = true;
+        if (model.getCurrentReceta().getPaciente() == null) {
+            valid = false;
+        }
+
+        if (model.getCurrentReceta().getMedicamento() == null) {
+            valid = false;
+        }
+
+        if (FechaDeRetiro.getDate() == null) {
+            valid = false;
+            FechaDeRetiro.getComponentDateTextField().setBackground(Main.BACKGROUND_ERROR);
+            FechaDeRetiro.getComponentDateTextField().setToolTipText("Fecha de retiro requerida");
+        } else {
+            FechaDeRetiro.getComponentDateTextField().setBackground(null);
+            FechaDeRetiro.getComponentDateTextField().setToolTipText(null);
+        }
+
+        if (model.getCurrentReceta().getCantidad() == null || model.getCurrentReceta().getDuracion() == null || model.getCurrentReceta().getIndicaciones() == null) {
+            valid = false;
+        }
+        return valid;
     }
 
     public void setController(hospital.presentation.prescripcion.Controller controller) {

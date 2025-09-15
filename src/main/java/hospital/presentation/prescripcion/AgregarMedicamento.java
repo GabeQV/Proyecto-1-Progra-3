@@ -60,18 +60,22 @@ public class AgregarMedicamento extends JDialog implements PropertyChangeListene
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
         medicamentosTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                if (e.getClickCount() == 2) {
+                if (e.getClickCount() == 2 && medicamentosTable.getSelectedRow() != -1) {
+                    Medicamento seleccionado = ((MedicamentosTableModel) medicamentosTable.getModel()).getRowAt(medicamentosTable.getSelectedRow());
                     medicamento = ((MedicamentosTableModel)medicamentosTable.getModel()).getRowAt(medicamentosTable.getSelectedRow());
                     model.getCurrentReceta().setMedicamento(medicamento);
                     model.setCurrentReceta(model.getCurrentReceta());
+                    dispose();
                 }
             }
         });
     }
+
+
 
     private void onOK() {
         int row = medicamentosTable.getSelectedRow();
